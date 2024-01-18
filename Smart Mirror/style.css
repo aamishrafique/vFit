@@ -6,7 +6,7 @@
 
 @font-face {
   font-family: "Thunder Black";
-  src: url("Thunder.ttf") format("truetype");
+  src: url("../Thunder.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -16,7 +16,10 @@ body {
   font-family: "Thunder Black", sans-serif;
   width: 1080px;
   height: 1920px;
-  /* height: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 h1 {
@@ -24,17 +27,6 @@ h1 {
   position: absolute;
   top: 0;
   font-size: 75px;
-}
-
-body {
-  /* background: black; */
-  /* background: rgba(239, 239, 239, 255); */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  /* background: url("images/background.jpg") no-repeat center center fixed; */
-  /* background-size: cover; */
 }
 
 .spinner {
@@ -163,42 +155,42 @@ body {
 }
 
 .a {
-  background-image: url("images/1.png");
+  background-image: url("../images/1.png");
 }
 
 .b {
-  background-image: url("images/2.png");
+  background-image: url("../images/2.png");
 }
 
 .c {
-  background-image: url("images/3.png");
+  background-image: url("../images/3.png");
 }
 
 .d {
-  background-image: url("images/4.png");
+  background-image: url("../images/4.png");
 }
 
 .e {
-  background-image: url("images/5.png");
+  background-image: url("../images/5.png");
 }
 
 .f {
-  background-image: url("images/6.png");
+  background-image: url("../images/6.png");
 }
 
 .g {
-  background-image: url("images/7.png");
+  background-image: url("../images/7.png");
 }
 
 .h {
-  background-image: url("images/8.png");
+  background-image: url("../images/8.png");
 }
 
 /* Character Animation */
 div.character {
   width: 100px;
   height: 100px;
-  background-image: url("images/robot.png");
+  background-image: url("../images/robot.png");
   background-size: cover;
   position: fixed;
   top: 100px;
