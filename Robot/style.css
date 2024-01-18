@@ -1,0 +1,128 @@
+.container {
+  /* background: #ffdf37; */
+  margin: 100px auto;
+  position: relative;
+  height: 800px;
+  width: 800px;
+}
+
+/* .robot-ears {
+  background: #d7ecf7;
+  border: 10px solid #000;
+  border-radius: 44px;
+  box-sizing: border-box;
+  height: 100px;
+  position: absolute;
+  left: 155px;
+  top: 410px;
+  width: 490px;
+} */
+
+.robot-head {
+  background: #fff;
+  border-radius: 120px;
+  border: 10px solid #000;
+  box-sizing: border-box;
+  position: absolute;
+  top: 300px;
+  left: 200px;
+  width: 400px;
+  height: 320px;
+}
+
+/* .pulse {
+  background: red;
+  border-radius: 500px;
+  height: 80px;
+  width: 80px;
+  position: absolute;
+  top: -125px;
+  left: 147px;
+  animation: pulse 1s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  from {
+    background: #663399;
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    background: #fff;
+    transform: scale(1.8);
+    opacity: 0;
+  }
+} */
+
+/* .robot-antenna {
+  background: #000;
+  height: 50px;
+  width: 14px;
+  position: absolute;
+  top: -50px;
+  left: 182px;
+}
+
+.robot-antenna:before {
+  background: #b88ef4;
+  border: 10px solid #000;
+  border-radius: 100px;
+  box-sizing: border-box;
+  content: "";
+  display: block;
+  position: relative;
+  top: -75px;
+  left: -34.5px;
+  width: 80px;
+  height: 80px;
+} */
+
+.robot-face {
+  box-sizing: border-box;
+  background: #94d3f7;
+  border-radius: 60px;
+  border: 8px solid #000;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 280px;
+  height: 200px;
+}
+
+.robot-eye-left,
+.robot-eye-right {
+  background: #000;
+  border-radius: 100px;
+  position: absolute;
+  top: 50px;
+  width: 40px;
+  animation: blink 4s infinite ease-in-out;
+}
+
+.robot-eye-left {
+  left: 56px;
+}
+
+.robot-eye-right {
+  right: 56px;
+}
+
+@keyframes blink {
+  0%,
+  12%,
+  100% {
+    height: 40px;
+    top: 50px;
+  }
+  5%,
+  7% {
+    height: 7px;
+    top: 71px;
+  }
+}
+.robot-mouth {
+  width: 80px;
+  position: absolute;
+  left: 92px;
+  top: 30px;
+}
