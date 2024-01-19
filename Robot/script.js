@@ -1,3 +1,5 @@
+document.getElementsByTagName("h1")[0].style.fontSize = "6vw";
+
 document.addEventListener("DOMContentLoaded", function () {
   function randomDirection() {
     const directions = ["left", "right", "center"];
