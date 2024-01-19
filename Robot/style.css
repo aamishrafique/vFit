@@ -1,9 +1,21 @@
-.container {
+.outer {
   /* background: #ffdf37; */
-  margin: 100px auto;
+  width: 400px;
+  height: 300px;
+  margin: 200px;
   position: relative;
-  height: 800px;
-  width: 800px;
+  background-color: #031927;
+  border-radius: 50% 50% 50% 50% / 34% 34% 66% 66%;
+}
+
+.inner {
+  width: 340px;
+  height: 240px;
+  left: 30px;
+  top: 15px;
+  position: absolute;
+  background-color: #eef0f2;
+  border-radius: 50% 50% 50% 50% / 34% 34% 66% 66%;
 }
 
 /* .robot-ears {
@@ -77,6 +89,52 @@
   height: 80px;
 } */
 
+.antenna.a-1 {
+  width: 10px;
+  height: 100px;
+  position: absolute;
+  top: -70px;
+  left: 50px;
+  background: #343436;
+  transform: rotate(-30deg);
+  z-index: -1;
+}
+
+.antenna.a-1::after {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  right: 10px;
+  bottom: 5px;
+  background: red;
+  border-radius: 50%;
+}
+
+.antenna.a-2 {
+  width: 10px;
+  height: 100px;
+  position: absolute;
+  top: -80px;
+  right: 270px;
+  background: #343436;
+  transform: rotate(15deg);
+  z-index: -1;
+}
+
+.antenna.a-2::after {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  right: 10px;
+  bottom: 5px;
+  background: red;
+  border-radius: 50%;
+}
+
 .robot-face {
   box-sizing: border-box;
   background: #94d3f7;
@@ -91,38 +149,45 @@
 
 .robot-eye-left,
 .robot-eye-right {
-  background: #000;
-  border-radius: 100px;
+  width: 90px;
+  height: 130px;
+  top: 30px;
   position: absolute;
-  top: 50px;
-  width: 40px;
+  border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
   animation: blink 4s infinite ease-in-out;
 }
 
 .robot-eye-left {
-  left: 56px;
+  left: 50px;
+  background-color: #eec643;
+  box-shadow: 0 0 20px rgba(238, 198, 67, 1);
 }
 
 .robot-eye-right {
-  right: 56px;
+  /* right: 56px; */
+  left: 200px;
+  background-color: #eec643;
+  box-shadow: 0 0 20px rgba(238, 198, 67, 1);
 }
 
 @keyframes blink {
   0%,
   12%,
   100% {
-    height: 40px;
-    top: 50px;
+    height: 130px;
+    top: 30px;
   }
   5%,
   7% {
-    height: 7px;
-    top: 71px;
+    height: 20px;
+    top: 70px;
   }
 }
 .robot-mouth {
-  width: 80px;
+  width: 30px;
+  height: 5px;
   position: absolute;
-  left: 92px;
-  top: 30px;
+  left: 160px;
+  top: 180px;
+  background-color: #031927;
 }
