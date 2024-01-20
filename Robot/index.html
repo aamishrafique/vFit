@@ -6,7 +6,12 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div class="robot-container">
+    <div class="robot-container" id="robotContainer">
+      <div class="snores">
+        <div class="snore snore-1">Z</div>
+        <div class="snore snore-2">Z</div>
+        <div class="snore snore-3">Z</div>
+      </div>
       <div class="outer">
         <div class="antenna-container">
           <div class="antenna _1"></div>
@@ -19,8 +24,8 @@
             <div class="animate-breathe">
               <div class="inner">
                 <div class="animate-look">
-                  <div class="robot-eye-left"></div>
-                  <div class="robot-eye-right"></div>
+                  <div class="robot-eye-left animate-sleep zzz"></div>
+                  <div class="robot-eye-right animate-sleep zzz"></div>
                   <div class="mouth"></div>
                 </div>
               </div>
@@ -29,5 +34,8 @@
         </div>
       </div>
     </div>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/DrawSVGPlugin.min.js"></script>
   </body>
 </html>

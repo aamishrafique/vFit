@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Singly Linked";
+  src: url("../SinglyLinked.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .robot-container {
   width: 400px;
   height: 300px;
@@ -81,7 +88,7 @@
 .robot-eye-right {
   width: 90px;
   height: 130px;
-  top: 30px;
+  top: 40px;
   position: absolute;
   border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
   animation: blink 5s infinite ease-in-out;
@@ -121,6 +128,18 @@
   }
   100% {
     transform: translate(0, 0);
+  }
+}
+
+.animate-sleep {
+  animation: sleep 5s infinite alternate ease-in-out;
+}
+
+@keyframes sleep {
+  0%,
+  100% {
+    height: 5px;
+    top: 100px;
   }
 }
 
@@ -297,5 +316,46 @@
     background: #fff;
     transform: scale(1.8);
     opacity: 0;
+  }
+}
+
+.snores {
+  top: -9%;
+  left: 125%;
+  position: relative;
+  font-family: "Singly Linked", sans-serif;
+}
+
+.snore {
+  top: 40px;
+  font-size: 30px;
+  color: black;
+  position: absolute;
+}
+
+.snore-1 {
+  animation: snoring 3s linear 1s infinite;
+}
+
+.snore-2 {
+  animation: snoring 3s linear 2s infinite;
+}
+
+.snore-3 {
+  animation: snoring 3s linear 3s infinite;
+}
+
+@keyframes snoring {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(0.8);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translate(20px, -70px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(40px, -140px) scale(1.2);
   }
 }
