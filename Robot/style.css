@@ -1,8 +1,10 @@
-body {
-  height: 100vh;
-  background-image: url("../images/backdrop.png");
+html {
+  width: 1080px;
+  height: 1920px;
+  background-image: url("../images/background.png");
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 @font-face {
@@ -16,7 +18,7 @@ body {
   width: 400px;
   height: 300px;
   margin: 200px;
-  padding-top: 975px;
+  padding-top: 875px;
   padding-left: 50px;
   position: relative;
 }
@@ -116,8 +118,42 @@ body {
   left: 200px;
 }
 
+.animate-sleep {
+  animation: sleep 5s infinite alternate ease-in-out;
+}
+
 .animate-look {
   animation: look 10s infinite alternate ease-in-out;
+}
+
+.animate-look-down {
+  animation: look-down 1s infinite alternate ease-in-out;
+}
+
+.animate-sleep-movement {
+  animation: sleep-movement 5s infinite alternate ease-in-out;
+}
+
+@keyframes blink {
+  0%,
+  12%,
+  100% {
+    height: 130px;
+    top: 40px;
+  }
+  5%,
+  7% {
+    height: 70px;
+    top: 70px;
+  }
+}
+
+@keyframes sleep {
+  0%,
+  100% {
+    height: 5px;
+    top: 100px;
+  }
 }
 
 @keyframes look {
@@ -141,36 +177,6 @@ body {
   }
 }
 
-.animate-sleep {
-  animation: sleep 5s infinite alternate ease-in-out;
-}
-
-@keyframes sleep {
-  0%,
-  100% {
-    height: 5px;
-    top: 100px;
-  }
-}
-
-@keyframes blink {
-  0%,
-  12%,
-  100% {
-    height: 130px;
-    top: 40px;
-  }
-  5%,
-  7% {
-    height: 70px;
-    top: 70px;
-  }
-}
-
-.animate-look-down {
-  animation: look-down 1s infinite alternate ease-in-out;
-}
-
 @keyframes look-down {
   0%,
   12%,
@@ -182,6 +188,18 @@ body {
   7% {
     height: 100px;
     top: 70px;
+  }
+}
+
+@keyframes sleep-movement {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0px, 15px);
+  }
+  100% {
+    transform: translate(0px, -5px);
   }
 }
 
@@ -268,27 +286,63 @@ body {
   transform: rotate(15deg);
 }
 
-.antenna::after {
+.orb1.off,
+.orb2.off {
   content: "";
   display: block;
   width: 30px;
   height: 30px;
   position: relative;
-  bottom: 30px;
-  right: 10px;
+  border-radius: 50%;
+  background: rgb(125, 125, 125);
+  background-color: rgba(125, 125, 125, 0.75);
+  box-shadow: 0 1px 5px rgba(125, 125, 125, 0.75);
+  animation: glow-off 3s infinite linear;
+}
+
+.orb1.off {
+  bottom: 91px;
+  left: 8px;
+}
+
+.orb2.off {
+  bottom: 137px;
+  left: 126px;
+}
+
+.orb1.on,
+.orb2.on {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  position: relative;
   border-radius: 50%;
   background: red;
   background-color: rgba(255, 0, 0, 0.8);
-  box-shadow: 0 1px 5px rgba(255, 0, 0);
+  box-shadow: 0 1px 5px red;
   animation: glow 3s infinite linear;
 }
 
+.orb1.on {
+  bottom: 91px;
+  left: 8px;
+}
+
+.orb2.on {
+  bottom: 137px;
+  left: 126px;
+}
+
 @keyframes glow {
-  from {
-    opacity: 1;
+  0% {
+    box-shadow: 0 1px 5px red;
   }
-  to {
-    opacity: 0.8;
+  50% {
+    box-shadow: 0 2px 15px red;
+  }
+  100% {
+    box-shadow: 0 1px 5px red;
   }
 }
 
@@ -298,7 +352,10 @@ body {
   top: -91px;
   left: 7px;
   position: absolute;
+  /* background: red; */
   background: red;
+  background-color: rgba(255, 0, 0, 0.8);
+  box-shadow: 0 1px 5px rgba(255, 0, 0);
   border-radius: 50%;
   animation: pulse 3s infinite ease-in-out;
   z-index: -1;
@@ -329,6 +386,10 @@ body {
   }
 }
 
+.wake-up {
+  font-family: "Monday Feelings", sans-serif;
+}
+
 .snores {
   /* top: -8%;
   left: 125%; */
@@ -346,15 +407,15 @@ body {
 }
 
 .snore-1 {
-  animation: snoring 3s linear 1s infinite;
+  animation: snoring 5s linear 3s infinite;
 }
 
 .snore-2 {
-  animation: snoring 3s linear 2s infinite;
+  animation: snoring 5s linear 4s infinite;
 }
 
 .snore-3 {
-  animation: snoring 3s linear 3s infinite;
+  animation: snoring 5s linear 5s infinite;
 }
 
 @keyframes snoring {
