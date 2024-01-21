@@ -31,11 +31,21 @@ html {
   animation: jump 3s 1 ease-in-out forwards;
 }
 
-@keyframes stay {
+.animate-snooze {
+  animation: snooze 2s 1 ease-in-out forwards;
+}
+
+@keyframes snooze {
+  to {
+    transform: translateY(0px);
+  }
+}
+
+/* @keyframes stay {
   to {
     transform: translateY(500px);
   }
-}
+} */
 
 @keyframes jump {
   to {

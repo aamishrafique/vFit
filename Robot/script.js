@@ -26,6 +26,8 @@ document.addEventListener("keydown", function (event) {
   }
 });
 
+let isFirstLoad = true;
+
 function sleepAwakeState() {
   const leftEye = document.querySelector(".robot-eye-left");
   const rightEye = document.querySelector(".robot-eye-right");
@@ -35,32 +37,21 @@ function sleepAwakeState() {
   const orb2 = document.querySelector(".orb2");
   const jump = document.querySelector(".robot-container");
 
-  // Check if the Robot is Sleeping, then Switch to Wake Up, and Vice Versa
-  if (zzz.classList.contains("snores")) {
-    zzz.classList.remove("snores");
-    // Hide the "ZZZ" Text and Stop the Snoring Animation
-    zzz.style.color = "rgba(0, 0, 0, 0)";
-    const snoreElements = zzz.querySelectorAll(".snore");
-    snoreElements.forEach((snore) => {
-      snore.style.animation = "none";
-    });
-  } else {
-    zzz.classList.add("snores");
-    // Show the "ZZZ" Text and Restart the Snoring Animation
-    zzz.style.color = "";
-    const snoreElements = zzz.querySelectorAll(".snore");
-    snoreElements.forEach((snore, index) => {
-      snore.style.animation = `snoring 5s linear ${3 + index}s infinite`;
-    });
-  }
-
   // Check if the Robot is Sleeping, then Stay, else, Jump, and Vice Versa
-  if (jump.classList.contains("animate-stay")) {
+  if (isFirstLoad) {
     jump.classList.remove("animate-stay");
     jump.classList.add("animate-jump");
+    isFirstLoad = false;
   } else {
-    jump.classList.remove("animate-jump");
-    jump.classList.add("animate-stay");
+    if (jump.classList.contains("animate-jump")) {
+      jump.classList.remove("animate-jump");
+      jump.classList.add("animate-snooze");
+      jump.style.transform = `translate(0px, -500px)`;
+    } else {
+      jump.classList.remove("animate-snooze");
+      jump.classList.add("animate-jump");
+      jump.style.transform = `translate(0px, 0px)`;
+    }
   }
 
   // Check if the Left Eye is in Sleep Mode, then Switch to Blink, and Vice Versa
@@ -100,6 +91,25 @@ function sleepAwakeState() {
       "animate-look"
     );
     innerBody.classList.add("animate-sleep-movement");
+  }
+
+  // Check if the Robot is Sleeping, then Switch to Wake Up, and Vice Versa
+  if (zzz.classList.contains("snores")) {
+    zzz.classList.remove("snores");
+    // Hide the "ZZZ" Text and Stop the Snoring Animation
+    zzz.style.color = "rgba(0, 0, 0, 0)";
+    const snoreElements = zzz.querySelectorAll(".snore");
+    snoreElements.forEach((snore) => {
+      snore.style.animation = "none";
+    });
+  } else {
+    zzz.classList.add("snores");
+    // Show the "ZZZ" Text and Restart the Snoring Animation
+    zzz.style.color = "";
+    const snoreElements = zzz.querySelectorAll(".snore");
+    snoreElements.forEach((snore, index) => {
+      snore.style.animation = `snoring 5s linear ${3 + index}s infinite`;
+    });
   }
 
   // Check if the Orb is Off, then Switch to On, and Vice Versa
