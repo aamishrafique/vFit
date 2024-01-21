@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Robot</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='robot.css') }}"
+    />
+  </head>
+  <body>
+    <div class="robot-container animate-stay" id="robotContainer">
+      <div class="wake-up snores">
+        <div class="snore snore-1">Z</div>
+        <div class="snore snore-2">Z</div>
+        <div class="snore snore-3">Z</div>
+      </div>
+      <div class="outer">
+        <div class="antenna-container">
+          <div class="antenna _1"></div>
+          <div class="antenna _2"></div>
+          <div class="orb1 off"></div>
+          <div class="orb2 off"></div>
+        </div>
+        <div class="inner animate-sleep-movement">
+          <div class="robot-eye-left animate-sleep zzz"></div>
+          <div class="robot-eye-right animate-sleep zzz"></div>
+          <div class="mouth"></div>
+        </div>
+      </div>
+    </div>
+    <script src="{{ url_for('static', filename='robot.js') }}"></script>
+  </body>
+</html>
