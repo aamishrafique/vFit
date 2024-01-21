@@ -33,23 +33,34 @@ function sleepAwakeState() {
   const zzz = document.querySelector(".wake-up");
   const orb1 = document.querySelector(".orb1");
   const orb2 = document.querySelector(".orb2");
+  const jump = document.querySelector(".robot-container");
 
-  // Check if the Orb is Off, then Switch to On, and Vice Versa
-  if (orb1.classList.contains("off")) {
-    orb1.classList.remove("off");
-    orb1.classList.add("on");
+  // Check if the Robot is Sleeping, then Switch to Wake Up, and Vice Versa
+  if (zzz.classList.contains("snores")) {
+    zzz.classList.remove("snores");
+    // Hide the "ZZZ" Text and Stop the Snoring Animation
+    zzz.style.color = "rgba(0, 0, 0, 0)";
+    const snoreElements = zzz.querySelectorAll(".snore");
+    snoreElements.forEach((snore) => {
+      snore.style.animation = "none";
+    });
   } else {
-    orb1.classList.remove("on");
-    orb1.classList.add("off");
+    zzz.classList.add("snores");
+    // Show the "ZZZ" Text and Restart the Snoring Animation
+    zzz.style.color = "";
+    const snoreElements = zzz.querySelectorAll(".snore");
+    snoreElements.forEach((snore, index) => {
+      snore.style.animation = `snoring 5s linear ${3 + index}s infinite`;
+    });
   }
 
-  // Check if the Orb is Off, then Switch to On, and Vice Versa
-  if (orb2.classList.contains("off")) {
-    orb2.classList.remove("off");
-    orb2.classList.add("on");
+  // Check if the Robot is Sleeping, then Stay, else, Jump, and Vice Versa
+  if (jump.classList.contains("animate-stay")) {
+    jump.classList.remove("animate-stay");
+    jump.classList.add("animate-jump");
   } else {
-    orb2.classList.remove("on");
-    orb2.classList.add("off");
+    jump.classList.remove("animate-jump");
+    jump.classList.add("animate-stay");
   }
 
   // Check if the Left Eye is in Sleep Mode, then Switch to Blink, and Vice Versa
@@ -91,9 +102,21 @@ function sleepAwakeState() {
     innerBody.classList.add("animate-sleep-movement");
   }
 
-  if (zzz.classList.contains("snores")) {
-    zzz.classList.remove("snores");
+  // Check if the Orb is Off, then Switch to On, and Vice Versa
+  if (orb1.classList.contains("off")) {
+    orb1.classList.remove("off");
+    orb1.classList.add("on");
   } else {
-    zzz.classList.add("snores");
+    orb1.classList.remove("on");
+    orb1.classList.add("off");
+  }
+
+  // Check if the Orb is Off, then Switch to On, and Vice Versa
+  if (orb2.classList.contains("off")) {
+    orb2.classList.remove("off");
+    orb2.classList.add("on");
+  } else {
+    orb2.classList.remove("on");
+    orb2.classList.add("off");
   }
 }

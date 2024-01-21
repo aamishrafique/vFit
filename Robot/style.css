@@ -23,6 +23,35 @@ html {
   position: relative;
 }
 
+.animate-stay {
+  font-family: "Monday Feelings", sans-serif;
+}
+
+.animate-jump {
+  animation: jump 3s 1 ease-in-out forwards;
+}
+
+@keyframes stay {
+  to {
+    transform: translateY(500px);
+  }
+}
+
+@keyframes jump {
+  to {
+    transform: translateY(-500px);
+  }
+}
+
+/* @keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-500px);
+  }
+} */
+
 .outer {
   width: 100%;
   height: 100%;
@@ -346,47 +375,12 @@ html {
   }
 }
 
-.pulse-1 {
-  width: 30px;
-  height: 30px;
-  top: -91px;
-  left: 7px;
-  position: absolute;
-  /* background: red; */
-  background: red;
-  background-color: rgba(255, 0, 0, 0.8);
-  box-shadow: 0 1px 5px rgba(255, 0, 0);
-  border-radius: 50%;
-  animation: pulse 3s infinite ease-in-out;
-  z-index: -1;
-}
-
-.pulse-2 {
-  width: 30px;
-  height: 30px;
-  top: -108px;
-  left: 127px;
-  position: absolute;
-  background: red;
-  border-radius: 50%;
-  animation: pulse 3s infinite ease-in-out;
-  z-index: -1;
-}
-
-@keyframes pulse {
-  from {
-    background: red;
-    transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    background: #fff;
-    transform: scale(1.8);
-    opacity: 0;
-  }
-}
-
 .wake-up {
+  top: 60%;
+  left: 125%;
+  font-size: 70px;
+  position: relative;
+  color: rgba(0, 0, 0, 0);
   font-family: "Monday Feelings", sans-serif;
 }
 
