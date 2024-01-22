@@ -41,26 +41,11 @@ html {
   }
 }
 
-/* @keyframes stay {
-  to {
-    transform: translateY(500px);
-  }
-} */
-
 @keyframes jump {
   to {
     transform: translateY(-500px);
   }
 }
-
-/* @keyframes jump {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-500px);
-  }
-} */
 
 .outer {
   width: 100%;
@@ -242,15 +227,13 @@ html {
   }
 }
 
-.antenna-container {
-  position: relative;
-}
-
 .antenna {
   width: 10px;
   height: 100px;
   position: absolute;
   background: #d8dbdf;
+  background-color: rgba(216, 219, 223, 0.75);
+  box-shadow: 0 1px 5px rgba(216, 219, 223, 0.75);
   z-index: -1;
 }
 

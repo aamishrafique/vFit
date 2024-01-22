@@ -7,50 +7,13 @@ document.addEventListener("keydown", function (event) {
 let isFirstLoad = true;
 
 function sleepAwakeState() {
+  const innerBody = document.querySelector(".inner");
+  const jump = document.querySelector(".robot-container");
+  const zzz = document.querySelector(".wake-up");
   const leftEye = document.querySelector(".robot-eye-left");
   const rightEye = document.querySelector(".robot-eye-right");
-  const innerBody = document.querySelector(".inner");
-  const zzz = document.querySelector(".wake-up");
   const orb1 = document.querySelector(".orb1");
   const orb2 = document.querySelector(".orb2");
-  const jump = document.querySelector(".robot-container");
-
-  // Check if the Robot is Sleeping, then Stay, else, Jump, and Vice Versa
-  if (isFirstLoad) {
-    jump.classList.remove("animate-stay");
-    jump.classList.add("animate-jump");
-    isFirstLoad = false;
-  } else {
-    if (jump.classList.contains("animate-jump")) {
-      jump.classList.remove("animate-jump");
-      jump.classList.add("animate-snooze");
-      jump.style.transform = `translate(0px, -500px)`;
-    } else {
-      jump.classList.remove("animate-snooze");
-      jump.classList.add("animate-jump");
-      jump.style.transform = `translate(0px, 0px)`;
-    }
-  }
-
-  // Check if the Left Eye is in Sleep Mode, then Switch to Blink, and Vice Versa
-  if (leftEye.classList.contains("animate-sleep")) {
-    leftEye.classList.remove("animate-sleep");
-    leftEye.classList.remove("zzz");
-    leftEye.classList.add("animate-blink");
-  } else {
-    leftEye.classList.remove("animate-blink");
-    leftEye.classList.add("animate-sleep", "zzz");
-  }
-
-  // Check if the Right Eye is in Sleep Mode, then Switch to Blink, and Vice Versa
-  if (rightEye.classList.contains("animate-sleep")) {
-    rightEye.classList.remove("animate-sleep");
-    leftEye.classList.remove("zzz");
-    rightEye.classList.add("animate-blink");
-  } else {
-    rightEye.classList.remove("animate-blink");
-    rightEye.classList.add("animate-sleep", "zzz");
-  }
 
   // Check if the Robot is in Sleep Mode, then Switch to Motion, and Vice Versa
   if (innerBody.classList.contains("animate-sleep-movement")) {
@@ -71,6 +34,23 @@ function sleepAwakeState() {
     innerBody.classList.add("animate-sleep-movement");
   }
 
+  // Check if the Robot is Sleeping, then Stay, else, Jump, and Vice Versa
+  if (isFirstLoad) {
+    jump.classList.remove("animate-stay");
+    jump.classList.add("animate-jump");
+    isFirstLoad = false;
+  } else {
+    if (jump.classList.contains("animate-jump")) {
+      jump.classList.remove("animate-jump");
+      jump.classList.add("animate-snooze");
+      jump.style.transform = `translate(0px, -500px)`;
+    } else {
+      jump.classList.remove("animate-snooze");
+      jump.classList.add("animate-jump");
+      jump.style.transform = `translate(0px, 0px)`;
+    }
+  }
+
   // Check if the Robot is Sleeping, then Switch to Wake Up, and Vice Versa
   if (zzz.classList.contains("snores")) {
     zzz.classList.remove("snores");
@@ -88,6 +68,26 @@ function sleepAwakeState() {
     snoreElements.forEach((snore, index) => {
       snore.style.animation = `snoring 5s linear ${3 + index}s infinite`;
     });
+  }
+
+  // Check if the Left Eye is in Sleep Mode, then Switch to Blink, and Vice Versa
+  if (leftEye.classList.contains("animate-sleep")) {
+    leftEye.classList.remove("animate-sleep");
+    leftEye.classList.remove("zzz");
+    leftEye.classList.add("animate-blink");
+  } else {
+    leftEye.classList.remove("animate-blink");
+    leftEye.classList.add("animate-sleep", "zzz");
+  }
+
+  // Check if the Right Eye is in Sleep Mode, then Switch to Blink, and Vice Versa
+  if (rightEye.classList.contains("animate-sleep")) {
+    rightEye.classList.remove("animate-sleep");
+    leftEye.classList.remove("zzz");
+    rightEye.classList.add("animate-blink");
+  } else {
+    rightEye.classList.remove("animate-blink");
+    rightEye.classList.add("animate-sleep", "zzz");
   }
 
   // Check if the Orb is Off, then Switch to On, and Vice Versa
