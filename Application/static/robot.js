@@ -1,13 +1,14 @@
+let isFirstLoad = true;
+
 document.addEventListener("keydown", function (event) {
   if (event.key === " ") {
     sleepAwakeState();
+    playEnterSound();
   }
   if (event.key === " " && !dialogShown) {
     showDialog();
   }
 });
-
-let isFirstLoad = true;
 
 function sleepAwakeState() {
   const innerBody = document.querySelector(".inner");
@@ -151,4 +152,9 @@ function showDialog() {
 
 function closeDialog() {
   document.getElementById("dialog").style.display = "none";
+}
+
+function playEnterSound() {
+  var enterSound = document.getElementById("jump");
+  enterSound.play();
 }

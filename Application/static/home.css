@@ -40,59 +40,60 @@ h1 {
 }
 
 .holder {
-  width: 600px;
-  height: 200px;
+  /* width: 600px; */
+  /* height: 200px; */
+  margin-top: -50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  perspective: 700px;
+  perspective: 1000px;
   perspective-origin: center;
 }
 
 .panel {
   border-radius: 5px;
   /* Change "width" and "height" for panel size */
-  width: 200px;
-  height: 200px;
+  width: 500px;
+  height: 500px;
   position: absolute;
   background-size: cover;
   background-position: 50% 50%;
 }
 
 .panel:nth-child(1) {
-  transform: rotateY(0deg) translateZ(400px);
+  transform: rotateY(0deg) translateZ(600px);
 }
 
 .panel:nth-child(2) {
-  transform: rotateY(45deg) translateZ(400px);
+  transform: rotateY(45deg) translateZ(600px);
 }
 
 .panel:nth-child(3) {
-  transform: rotateY(90deg) translateZ(400px);
+  transform: rotateY(90deg) translateZ(600px);
 }
 
 .panel:nth-child(4) {
-  transform: rotateY(135deg) translateZ(400px);
+  transform: rotateY(135deg) translateZ(600px);
 }
 
 .panel:nth-child(5) {
-  transform: rotateY(180deg) translateZ(400px);
+  transform: rotateY(180deg) translateZ(600px);
 }
 
 .panel:nth-child(6) {
-  transform: rotateY(225deg) translateZ(400px);
+  transform: rotateY(225deg) translateZ(600px);
 }
 
 .panel:nth-child(7) {
-  transform: rotateY(270deg) translateZ(400px);
+  transform: rotateY(270deg) translateZ(600px);
 }
 
 .panel:nth-child(8) {
-  transform: rotateY(315deg) translateZ(400px);
+  transform: rotateY(315deg) translateZ(600px);
 }
 
 .panel:nth-child(9) {
-  transform: rotateY(360deg) translateZ(400px);
+  transform: rotateY(360deg) translateZ(600px);
 }
 
 .pagination {
@@ -112,7 +113,7 @@ h1 {
   color: white;
   background: black;
   height: 44px;
-  margin: 120px 20px 0;
+  margin: 700px 20px 0;
   font-family: "Roboto", sans-serif;
   font-size: 20px;
   border-radius: 100%;
