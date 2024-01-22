@@ -11,7 +11,7 @@ $("#next").click(function () {
   $("*").css("--ang", ang);
 });
 
-// Character Animation
+// Robot Animation
 $(document).ready(function () {
   animateDiv($(".character"));
 });
