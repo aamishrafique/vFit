@@ -242,65 +242,6 @@ html {
   }
 }
 
-.robot-mouth {
-  /* width: 30px; */
-  width: 80px;
-  /* height: 5px; */
-  position: absolute;
-  top: 30px;
-  /* top: 180px; */
-  left: 92px;
-  /* left: 160px; */
-  /* background-color: #031927; */
-}
-
-/* .pulse {
-  background: red;
-  border-radius: 500px;
-  height: 80px;
-  width: 80px;
-  position: absolute;
-  top: -125px;
-  left: 147px;
-  animation: pulse 1s infinite ease-in-out;
-}
-
-@keyframes pulse {
-  from {
-    background: #663399;
-    transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    background: #fff;
-    transform: scale(1.8);
-    opacity: 0;
-  }
-} */
-
-/* .robot-antenna {
-  background: #000;
-  height: 50px;
-  width: 14px;
-  position: absolute;
-  top: -50px;
-  left: 182px;
-}
-
-.robot-antenna:before {
-  background: #b88ef4;
-  border: 10px solid #000;
-  border-radius: 100px;
-  box-sizing: border-box;
-  content: "";
-  display: block;
-  position: relative;
-  top: -75px;
-  left: -34.5px;
-  width: 80px;
-  height: 80px;
-} */
-
 .antenna-container {
   position: relative;
 }
