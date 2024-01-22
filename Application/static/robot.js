@@ -2,6 +2,9 @@ document.addEventListener("keydown", function (event) {
   if (event.key === " ") {
     sleepAwakeState();
   }
+  if (event.key === " " && !dialogShown) {
+    showDialog();
+  }
 });
 
 let isFirstLoad = true;
@@ -114,3 +117,38 @@ document.addEventListener("keydown", function (event) {
     window.location.href = "/trigger/n";
   }
 });
+
+var dialogShown = false;
+
+function showDialog() {
+  var dialogElement = document.getElementById("dialog");
+
+  var box = setTimeout(function () {
+    dialogElement.style.display = "block";
+  }, 3000);
+
+  var one = setTimeout(function () {
+    dialogElement.querySelector("p").innerText =
+      "Hello! My name is Ada, your friendly virtual assistant.";
+  }, 0);
+
+  var two = setTimeout(function () {
+    dialogElement.querySelector("p").innerText =
+      "I'm here to style to today. Shall we begin?";
+  }, 6000);
+
+  var three = setTimeout(function () {
+    dialogElement.querySelector("p").innerText =
+      "Give me a thumbs-up to start!";
+  }, 9000);
+
+  dialogShown = true;
+
+  var hideTimeout = setTimeout(function () {
+    closeDialog();
+  }, 12000); // Change this to Set the Duration of the Last Dialog
+}
+
+function closeDialog() {
+  document.getElementById("dialog").style.display = "none";
+}
