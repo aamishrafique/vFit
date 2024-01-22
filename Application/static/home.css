@@ -283,15 +283,13 @@ h1 {
   }
 }
 
-.antenna-container {
-  position: relative;
-}
-
 .antenna {
   width: 10px;
   height: 100px;
   position: absolute;
   background: #d8dbdf;
+  background-color: rgba(216, 219, 223, 0.75);
+  box-shadow: 0 1px 5px rgba(216, 219, 223, 0.75);
   z-index: -1;
 }
 
