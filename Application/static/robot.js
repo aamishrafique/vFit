@@ -159,6 +159,5 @@ function closeDialog() {
 }
 
 function playEnterSound() {
-  var jump = document.getElementById("jump");
-  jump.play();
+  document.getElementById("jump").play();
 }

@@ -6,6 +6,7 @@ $("#prev").click(function () {
   ang = ang + 36;
   $("*").css("--ang", ang);
   count++;
+  document.getElementById("scroll").play();
   checkAndUpdateDialogText();
 });
 
@@ -13,6 +14,7 @@ $("#next").click(function () {
   ang = ang - 36;
   $("*").css("--ang", ang);
   count++;
+  document.getElementById("scroll").play();
   checkAndUpdateDialogText();
 });
 
@@ -64,8 +66,9 @@ function updateDialogText() {
   }, 0);
 
   var one = setTimeout(function () {
+    document.getElementById("talk4").play();
     dialogElement.querySelector("p").innerText =
-      "\nSwipe back and forth to\nchange your shirt.";
+      "\nSwipe right and left to\nchange your shirt.";
   }, 0);
 
   var hideTimeout = setTimeout(function () {
@@ -78,18 +81,21 @@ function checkAndUpdateDialogText() {
   if (count === 3) {
     // Update the Text when Count is 3
     var two = setTimeout(function () {
+      document.getElementById("talk3").play();
       dialogElement.querySelector("p").innerText =
-        "\nYou would look great in this!";
+        "\n\nYou would look great in this!";
     }, 0);
   } else if (count === 5) {
     // Update the Text when Count is 5
     var three = setTimeout(function () {
+      document.getElementById("talk1").play();
       dialogElement.querySelector("p").innerText =
         "\nThat color would really make your\neyes shine!";
     }, 0);
   } else if (count === 12) {
     // Update the Text when Count is 12
     var four = setTimeout(function () {
+      document.getElementById("talk5").play();
       dialogElement.querySelector("p").innerText =
         "\n\nHaving trouble choosing?";
     }, 0);
@@ -101,3 +107,7 @@ function checkAndUpdateDialogText() {
     }, 0);
   }
 }
+
+window.onload = function () {
+  document.getElementById("shrink").play();
+};

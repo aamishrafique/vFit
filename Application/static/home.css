@@ -233,7 +233,7 @@ h1 {
 }
 
 .animate-move-top-left {
-  animation: move-top-left 5s forwards;
+  animation: move-top-left 3s forwards;
 }
 
 @keyframes move-top-left {
