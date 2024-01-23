@@ -1,14 +1,19 @@
 // Slider Pagination
 var ang = 0;
+var count = 0;
 
 $("#prev").click(function () {
   ang = ang + 36;
   $("*").css("--ang", ang);
+  count++;
+  checkAndUpdateDialogText();
 });
 
 $("#next").click(function () {
   ang = ang - 36;
   $("*").css("--ang", ang);
+  count++;
+  checkAndUpdateDialogText();
 });
 
 // Robot
@@ -60,10 +65,26 @@ function updateDialogText() {
 
   var one = setTimeout(function () {
     dialogElement.querySelector("p").innerText =
-      "Swipe back and forth to\nchange your shirt.";
+      "\nSwipe back and forth to\nchange your shirt.";
   }, 0);
 
   var hideTimeout = setTimeout(function () {
     closeDialog();
   }, 6000);
+}
+
+function checkAndUpdateDialogText() {
+  if (count === 3) {
+    // Update text when count is 3
+    var three = setTimeout(function () {
+      dialogElement.querySelector("p").innerText =
+        "\nYou would look great in this!";
+    }, 0);
+  } else if (count === 5) {
+    // Update text when count is 5
+    var five = setTimeout(function () {
+      dialogElement.querySelector("p").innerText =
+        "\nThat color would really make your\neyes shine!";
+    }, 0);
+  }
 }
