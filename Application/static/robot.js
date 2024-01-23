@@ -134,11 +134,15 @@ function showDialog() {
   }, 0);
 
   var two = setTimeout(function () {
+    var talk1 = document.getElementById("talk1");
+    talk1.play();
     dialogElement.querySelector("p").innerText =
       "I'm here to style to today. Shall we begin?";
   }, 6000);
 
   var three = setTimeout(function () {
+    var talk2 = document.getElementById("talk2");
+    talk2.play();
     dialogElement.querySelector("p").innerText =
       "Give me a thumbs-up to start!";
   }, 9000);
@@ -155,6 +159,6 @@ function closeDialog() {
 }
 
 function playEnterSound() {
-  var enterSound = document.getElementById("jump");
-  enterSound.play();
+  var jump = document.getElementById("jump");
+  jump.play();
 }

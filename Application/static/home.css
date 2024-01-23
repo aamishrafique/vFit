@@ -225,9 +225,9 @@ h1 {
 .robot-container {
   width: 400px;
   height: 300px;
-  padding-bottom: 470px;
+  padding-bottom: 647px;
   /* margin-bottom: 1500px; */
-  padding-right: 320px;
+  padding-right: 395px;
   position: absolute;
   z-index: 1;
 }
@@ -241,7 +241,7 @@ h1 {
     transform: scale(1);
   }
   100% {
-    transform: scale(0.5) translate(-100%, 90%);
+    transform: scale(0.5) translate(-100%, 87.5%);
   }
 }
 

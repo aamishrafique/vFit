@@ -44,7 +44,7 @@ html {
 
 @keyframes jump {
   to {
-    transform: translateY(-500px);
+    transform: translateY(-500px) translateX(-115px);
   }
 }
 
@@ -367,12 +367,12 @@ html {
 #dialog {
   display: none;
   position: fixed;
-  top: 20%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 600px;
-  height: 300px;
-  padding: 20px;
+  height: 400px;
+  padding: 40px;
   background: linear-gradient(
     to bottom,
     rgba(16, 24, 32, 0.8) 0%,
@@ -385,6 +385,8 @@ html {
   color: #ffffff;
   font-family: "Woliu Maners";
   overflow: hidden;
+  opacity: 0;
+  animation: text-appear 1s forwards;
 }
 
 #dialog::after {
@@ -402,6 +404,15 @@ html {
 
 #dialog p {
   margin: 0;
+}
+
+@keyframes text-appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes hologram-animation {
