@@ -2,16 +2,16 @@
 var ang = 0;
 
 $("#prev").click(function () {
-  ang = ang + 45;
+  ang = ang + 36;
   $("*").css("--ang", ang);
 });
 
 $("#next").click(function () {
-  ang = ang - 45;
+  ang = ang - 36;
   $("*").css("--ang", ang);
 });
 
-// Robot Animation
+// Robot
 $(document).ready(function () {
   animateDiv($(".character"));
 });
@@ -41,4 +41,29 @@ function animateDiv($target) {
   $target.animate({ top: next[0], left: next[1] }, speed, function () {
     animateDiv($target);
   });
+}
+
+// Dialog Box
+var dialogElement = document.getElementById("dialog");
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "t") {
+    updateDialogText();
+  }
+});
+
+// Update the Dialog Text
+function updateDialogText() {
+  var box = setTimeout(function () {
+    dialogElement.style.display = "block";
+  }, 0);
+
+  var one = setTimeout(function () {
+    dialogElement.querySelector("p").innerText =
+      "Swipe back and forth to\nchange your shirt.";
+  }, 0);
+
+  var hideTimeout = setTimeout(function () {
+    closeDialog();
+  }, 6000);
 }
