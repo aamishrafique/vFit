@@ -456,6 +456,8 @@ h1 {
   color: #ffffff;
   font-family: "Montserrat-Thin";
   overflow: hidden;
+  opacity: 0;
+  animation: text-appear 2s forwards;
 }
 
 #dialog::after {
@@ -475,6 +477,15 @@ h1 {
   margin-top: 10;
   margin-left: 250px;
   position: absolute;
+}
+
+@keyframes text-appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes hologram-animation {
