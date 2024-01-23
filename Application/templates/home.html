@@ -76,6 +76,9 @@
           optionsTime
         );
 
+        // Add three non-breaking spaces at the beginning of the time
+        formattedTime = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + formattedTime;
+
         document.getElementById(
           "datetime"
         ).innerHTML = `<div>${formattedDate}</div><div>${formattedTime}</div>`;

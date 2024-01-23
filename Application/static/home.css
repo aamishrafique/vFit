@@ -241,7 +241,7 @@ h1 {
     transform: scale(1);
   }
   100% {
-    transform: scale(0.5) translate(-100%, 130%);
+    transform: scale(0.5) translate(-100%, 90%);
   }
 }
 
@@ -429,8 +429,8 @@ h1 {
 #datetime {
   font-family: "Montserrat-Thin";
   position: absolute;
-  top: 87%;
-  left: 37%;
+  top: 9%;
+  left: 36%;
   font-size: 25px;
   color: white;
 }
@@ -439,7 +439,7 @@ h1 {
 #dialog {
   display: none;
   position: fixed;
-  top: 77%;
+  top: 70%;
   left: 60%;
   transform: translate(-50%, -50%);
   width: 1100px;
