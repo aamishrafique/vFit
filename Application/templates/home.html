@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>vFit: Smart Mirror</title>
     <link
       rel="stylesheet"
@@ -9,19 +10,23 @@
     />
   </head>
   <body>
-    <h1>vFit: Smart Mirror</h1>
-    <!-- <div class="robot-container animate-shrink" id="robotContainer">
+    <div id="datetime"></div>
+    <h1>vFit Smart Mirror</h1>
+    <div class="glass-box"></div>
+    <div class="robot-container animate-move-top-left" id="robotContainer">
       <div class="outer">
         <div class="antenna _1"></div>
         <div class="antenna _2"></div>
         <div class="orb1 on"></div>
         <div class="orb2 on"></div>
-        <div class="inner animate-wobble animate-tilt-head animate-breathe">
-          <div class="robot-eye-left animate-look"></div>
-          <div class="robot-eye-right animate-look"></div>
+        <div
+          class="inner animate-wobble animate-tilt-head animate-breathe animate-look"
+        >
+          <div class="robot-eye-left animate-blink"></div>
+          <div class="robot-eye-right animate-blink"></div>
         </div>
       </div>
-    </div> -->
+    </div>
     <div class="holder">
       <div class="spinner">
         <div class="panel a"></div>
@@ -41,5 +46,38 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{ url_for('static', filename='home.js') }}"></script>
+    <script>
+      function updateDateTime() {
+        var currentDate = new Date();
+        var optionsDate = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        var optionsTime = {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          timeZoneName: "short",
+        };
+
+        var formattedDate = currentDate.toLocaleDateString(
+          "en-US",
+          optionsDate
+        );
+        var formattedTime = currentDate.toLocaleTimeString(
+          "en-US",
+          optionsTime
+        );
+
+        document.getElementById(
+          "datetime"
+        ).innerHTML = `<div>${formattedDate}</div><div>${formattedTime}</div>`;
+      }
+
+      updateDateTime();
+      setInterval(updateDateTime, 1000);
+    </script>
   </body>
 </html>
