@@ -73,18 +73,31 @@ function updateDialogText() {
   }, 6000);
 }
 
+// Function to Check Count and Update the Dialog Text
 function checkAndUpdateDialogText() {
   if (count === 3) {
-    // Update text when count is 3
-    var three = setTimeout(function () {
+    // Update the Text when Count is 3
+    var two = setTimeout(function () {
       dialogElement.querySelector("p").innerText =
         "\nYou would look great in this!";
     }, 0);
   } else if (count === 5) {
-    // Update text when count is 5
-    var five = setTimeout(function () {
+    // Update the Text when Count is 5
+    var three = setTimeout(function () {
       dialogElement.querySelector("p").innerText =
         "\nThat color would really make your\neyes shine!";
+    }, 0);
+  } else if (count === 12) {
+    // Update the Text when Count is 12
+    var four = setTimeout(function () {
+      dialogElement.querySelector("p").innerText =
+        "\n\nHaving trouble choosing?";
+    }, 0);
+  } else if (count > 5 && count < 12) {
+    // Update the Text when Count is Between 5 and 12
+    var five = setTimeout(function () {
+      dialogElement.querySelector("p").innerText =
+        "\nSwipe back and forth to\nchange your shirt.";
     }, 0);
   }
 }

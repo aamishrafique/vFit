@@ -26,6 +26,21 @@ body {
   z-index: -2;
 }
 
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -1%;
+  width: 110%;
+  height: 100%;
+  background-image: url("./images/background.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(7px);
+  z-index: -1;
+}
+
 h1 {
   position: absolute;
   top: -1%;
@@ -408,22 +423,6 @@ h1 {
   100% {
     transform: translate(0, 0);
   }
-}
-
-/* Glass Box */
-.glass-box {
-  position: absolute;
-  z-index: -1;
-  /* width: 95vw; */
-  width: 45vw;
-  height: 150vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* border-radius: 20px; */
-  background: rgba(16, 24, 32, 0.3);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
 }
 
 /* Current Date and Time */
