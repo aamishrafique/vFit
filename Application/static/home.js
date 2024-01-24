@@ -18,6 +18,12 @@ $("#next").click(function () {
   checkAndUpdateDialogText();
 });
 
+document.addEventListener("keydown", function (event) {
+  if (event.key === "p") {
+    window.location.href = "/trigger/p";
+  }
+});
+
 // Robot
 $(document).ready(function () {
   animateDiv($(".character"));

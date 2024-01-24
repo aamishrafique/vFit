@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Code App</title>
+  </head>
+  <body>
+    <h1>QR Code App</h1>
+    <img
+      src="{{ url_for('static', filename='qr_code/' + i + '.png') }}"
+      alt="QR Code"
+    />
+    <br />
+    <a
+      href="{{ url_for('download', filename=i) }}"
+      download="result_{{ i }}.png"
+      >Download Image</a
+    >
+  </body>
+</html>
