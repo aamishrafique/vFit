@@ -53,11 +53,11 @@ function animateDiv($target) {
 // Dialog Box
 var dialogElement = document.getElementById("dialog");
 
-document.addEventListener("keydown", function (event) {
-  if (event.key === "t") {
-    updateDialogText();
-  }
-});
+// document.addEventListener("keydown", function (event) {
+//   if (event.key === "t") {
+//     updateDialogText();
+//   }
+// });
 
 // Update the Dialog Text
 function updateDialogText() {
@@ -78,36 +78,52 @@ function updateDialogText() {
 
 // Function to Check Count and Update the Dialog Text
 function checkAndUpdateDialogText() {
-  if (count === 3) {
-    // Update the Text when Count is 3
+  if (count > 2 && count < 4) {
+    // Update the Text when Count is Between 2 and 4
+    var one = setTimeout(function () {
+      document.getElementById("talk3").play();
+      dialogElement.querySelector("p").innerText =
+        "\nGive a thumbs-up to put a\nshirt on.";
+    }, 0);
+  }
+  if (count === 5) {
+    // Update the Text when Count is 5
     var two = setTimeout(function () {
       document.getElementById("talk3").play();
       dialogElement.querySelector("p").innerText =
-        "\n\nYou would look great in this!";
+        "\nYou would look great in this!";
     }, 0);
-  } else if (count === 5) {
-    // Update the Text when Count is 5
+  } else if (count === 6) {
+    // Update the Text when Count is 6
+    var five = setTimeout(function () {
+      dialogElement.querySelector("p").innerText =
+        "\nGive a thumbs-up to put a\nshirt on.";
+    }, 0);
+  } else if (count === 7) {
+    // Update the Text when Count is 7
     var three = setTimeout(function () {
       document.getElementById("talk1").play();
       dialogElement.querySelector("p").innerText =
         "\nThat color would really make your\neyes shine!";
     }, 0);
-  } else if (count === 12) {
-    // Update the Text when Count is 12
-    var four = setTimeout(function () {
-      document.getElementById("talk5").play();
-      dialogElement.querySelector("p").innerText =
-        "\n\nHaving trouble choosing?";
-    }, 0);
   } else if (count > 5 && count < 12) {
     // Update the Text when Count is Between 5 and 12
     var five = setTimeout(function () {
       dialogElement.querySelector("p").innerText =
-        "\nSwipe back and forth to\nchange your shirt.";
+        "\nGive a thumbs-up to put a\nshirt on.";
+    }, 0);
+  } else if (count === 12) {
+    // Update the Text when Count is 12
+    var four = setTimeout(function () {
+      document.getElementById("talk5").play();
+      dialogElement.querySelector("p").innerText = "\nHaving trouble choosing?";
     }, 0);
   }
 }
 
 window.onload = function () {
   document.getElementById("shrink").play();
+  setTimeout(function () {
+    updateDialogText();
+  }, 2000);
 };
