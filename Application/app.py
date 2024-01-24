@@ -1,10 +1,31 @@
 import os
 from flask import Flask, render_template, redirect, url_for, send_file, request
 import qrcode
+import cv2
+import numpy as np
 
 app = Flask(__name__, static_url_path="/static")
 
+
+def merge_images(
+    background_path, overlay_path, output_path, scale_factor=1.2, y_offset_shift=-50
+):
+    background = cv2.imread(background_path)
+    overlay = cv2.imread(overlay_path)
+    overlay = cv2.resize(overlay, (0, 0), fx=scale_factor, fy=scale_factor)
+    overlay_height, overlay_width, _ = overlay.shape
+    x_offset = (background.shape[1] - overlay_width) // 2
+    y_offset = (background.shape[0] - overlay_height) // 2 + y_offset_shift
+    background[
+        y_offset : y_offset + overlay_height, x_offset : x_offset + overlay_width
+    ] = overlay
+    cv2.imwrite(output_path, background)
+
+
 i = 1
+background = cv2.imread(
+    os.path.join(os.path.dirname(__file__), "static", "images", "template.png")
+)
 
 
 # Function to Generate the QR Code
@@ -35,7 +56,7 @@ def robot():
 
 @app.route("/download/<int:filename>")
 def download(filename):
-    path = f"static/result/{filename}.png"
+    path = f"static/template/{filename}.png"
     download_name = f"result_{filename}.png"
     return send_file(path, as_attachment=True, download_name=download_name)
 
@@ -43,10 +64,29 @@ def download(filename):
 @app.route("/qr_code")
 def qr_code():
     global i
-    image_filename = f"{i}.png"
-    ngrok_url = "https://4d5d-182-191-88-42.ngrok-free.app"
-    data = f"{ngrok_url}/static/result/{image_filename}"
-    # data = f"{request.url_root}static/result/{image_filename}"
+    image_filename = f"{i}.jpg"
+    ngrok_url = "https://813f-182-191-88-42.ngrok-free.app"
+
+    scale_factor = 1.2
+    y_offset_shift = -50
+    global background
+    overlay = cv2.imread(
+        os.path.join(os.path.dirname(__file__), "static", "result", image_filename)
+    )
+    overlay = cv2.resize(overlay, (0, 0), fx=scale_factor, fy=scale_factor)
+    overlay_height, overlay_width, _ = overlay.shape
+    x_offset = (background.shape[1] - overlay_width) // 2
+    y_offset = (background.shape[0] - overlay_height) // 2 + y_offset_shift
+    background[
+        y_offset : y_offset + overlay_height, x_offset : x_offset + overlay_width
+    ] = overlay
+    cv2.imwrite(
+        os.path.join(os.path.dirname(__file__), "static", "template", image_filename),
+        background,
+    )
+    data = f"{ngrok_url}/static/template/{image_filename}"
+    # data = f"{request.url_root}static/template/{image_filename}"
+
     img = generate_qr_code(data)
     i += 1
     return render_template("qr_code.html", i=str(i - 1))
