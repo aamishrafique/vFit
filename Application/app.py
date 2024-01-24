@@ -1,5 +1,6 @@
 import os
 from flask import Flask, render_template, redirect, url_for, send_file, request
+from PIL import Image, ImageEnhance
 import qrcode
 import cv2
 import numpy as np
@@ -40,7 +41,7 @@ def generate_qr_code(data):
     qr.add_data(data)
     qr.make(fit=True)
 
-    img = qr.make_image(fill_color="black", back_color="white")
+    img = qr.make_image(fill_color="black", back_color="#FFFFFF")
 
     static_dir = os.path.join(os.path.dirname(__file__), "static", "qr_code")
     os.makedirs(static_dir, exist_ok=True)
@@ -88,8 +89,9 @@ def qr_code():
     # data = f"{request.url_root}static/template/{image_filename}"
 
     img = generate_qr_code(data)
-    i += 1
-    return render_template("qr_code.html", i=str(i - 1))
+    # NOTE: Uncomment the Below Line
+    # i += 1
+    return render_template("qr_code.html", i=str(i))
 
 
 @app.route("/home")

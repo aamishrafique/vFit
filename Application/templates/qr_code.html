@@ -3,19 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QR Code App</title>
+    <title>QR Code</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='qr_code.css') }}"
+    />
   </head>
   <body>
-    <h1>QR Code App</h1>
     <img
       src="{{ url_for('static', filename='qr_code/' + i + '.png') }}"
       alt="QR Code"
+      class="image"
     />
-    <br />
-    <a
-      href="{{ url_for('download', filename=i) }}"
-      download="result_{{ i }}.png"
-      >Download Image</a
-    >
+    <div class="robot-container animate-move-top-left" id="robotContainer">
+      <div class="outer">
+        <div class="antenna _1"></div>
+        <div class="antenna _2"></div>
+        <div class="orb1 on"></div>
+        <div class="orb2 on"></div>
+        <div
+          class="inner animate-wobble animate-tilt-head animate-breathe animate-look"
+        >
+          <div class="robot-eye-left animate-blink"></div>
+          <div class="robot-eye-right animate-blink"></div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
