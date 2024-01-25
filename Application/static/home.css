@@ -31,8 +31,8 @@ body::before {
   position: absolute;
   top: 0;
   left: -1%;
-  width: 110%;
-  height: 100%;
+  width: 1120px;
+  height: 1920px;
   background-image: url("./images/background.png");
   background-position: center;
   background-size: cover;
@@ -495,4 +495,11 @@ h1 {
   100% {
     background-position: 100% 0;
   }
+}
+
+.image {
+  /* width: 1080px; */
+  /* height: 1920px; */
+  width: 100%;
+  /* z-index: 5; */
 }

@@ -47,7 +47,7 @@ function sleepAwakeState() {
     if (jump.classList.contains("animate-jump")) {
       jump.classList.remove("animate-jump");
       jump.classList.add("animate-snooze");
-      jump.style.transform = `translate(0px, -500px)`;
+      jump.style.transform = `translate(-115px, -500px)`;
     } else {
       jump.classList.remove("animate-snooze");
       jump.classList.add("animate-jump");

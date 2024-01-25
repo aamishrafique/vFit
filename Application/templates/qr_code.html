@@ -10,10 +10,22 @@
     />
   </head>
   <body>
+    <audio
+      id="talk1"
+      src="{{ url_for('static', filename='talk1.mp3') }}"
+    ></audio>
+    <div id="dialog">
+      <p></p>
+    </div>
+    <img
+      src="{{ url_for('static', filename='result/' + i + '.jpg') }}"
+      alt="Result"
+      class="result"
+    />
     <img
       src="{{ url_for('static', filename='qr_code/' + i + '.png') }}"
       alt="QR Code"
-      class="image"
+      class="qr_code"
     />
     <div class="robot-container animate-move-top-left" id="robotContainer">
       <div class="outer">
@@ -29,5 +41,7 @@
         </div>
       </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='qr_code.js') }}"></script>
   </body>
 </html>

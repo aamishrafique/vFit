@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Montserrat-Thin";
+  src: url("../static/Montserrat-Thin.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 html,
 body {
   font-family: "Montserrat-Thin";
@@ -19,7 +26,7 @@ body::before {
   position: absolute;
   top: 0;
   left: -1%;
-  width: 1080px;
+  width: 1120px;
   height: 1920px;
   background-image: url("./images/background.png");
   background-position: center;
@@ -29,20 +36,29 @@ body::before {
   z-index: -1;
 }
 
-.image {
-  margin-top: -20%;
+.result {
+  position: absolute;
+  margin-top: -110%;
+  width: 400px;
+  border-radius: 10px;
+  animation: zoom-in 1s ease-in-out forwards;
+}
+
+.qr_code {
+  position: absolute;
+  margin-bottom: 15%;
   opacity: 0.75;
   border-radius: 10px;
   filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.9));
-  animation: zoom-in 3s ease-in-out forwards;
+  animation: zoom-in 1s ease-in-out forwards;
 }
 
 @keyframes zoom-in {
   from {
-    transform: scale(0.9);
+    transform: scale(0.8);
   }
   to {
-    transform: scale(1.1);
+    transform: scale(1);
   }
 }
 
@@ -58,7 +74,7 @@ body::before {
 }
 
 .animate-move-top-left {
-  animation: move-top-left 3s forwards;
+  animation: move-top-left 0s forwards;
 }
 
 @keyframes move-top-left {
@@ -247,5 +263,68 @@ body::before {
   }
   100% {
     transform: translate(0, 0);
+  }
+}
+
+/* Dialog Box */
+#dialog {
+  display: none;
+  position: fixed;
+  top: 70%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  width: 1100px;
+  height: 280px;
+  padding: 5px;
+  background: linear-gradient(
+    to left,
+    rgba(16, 24, 32, 0.8) 0%,
+    rgba(16, 24, 32, 0) 100%
+  );
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0);
+  z-index: 9999;
+  font-size: 40px;
+  color: #ffffff;
+  font-family: "Montserrat-Thin";
+  /* font-family: monospace; */
+  overflow: hidden;
+  opacity: 0;
+  animation: text-appear 2s forwards;
+}
+
+#dialog::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 50%);
+  background-size: 5px 5px;
+  animation: hologram-animation 5s infinite linear;
+  z-index: -2;
+}
+
+#dialog p {
+  margin-top: 10;
+  margin-left: 250px;
+  position: absolute;
+}
+
+@keyframes text-appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hologram-animation {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
   }
 }

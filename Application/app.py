@@ -66,7 +66,7 @@ def download(filename):
 def qr_code():
     global i
     image_filename = f"{i}.jpg"
-    ngrok_url = "https://813f-182-191-88-42.ngrok-free.app"
+    ngrok_url = "https://ec80-139-135-32-235.ngrok-free.app"
 
     scale_factor = 1.2
     y_offset_shift = -50
