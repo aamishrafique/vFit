@@ -31,15 +31,6 @@ background = cv2.imread(
 
 
 # Function to Generate the QR Code
-# def generate_qr_code(filename):
-#     global ngrok_url
-#     data = f"{ngrok_url}/images/{filename}"
-#     static_dir = os.path.join(os.path.dirname(__file__), "static", "qr_code")
-#     os.makedirs(static_dir, exist_ok=True)
-#     img.save(os.path.join(static_dir, f"{i}.png"))
-#     return img
-
-
 def generate_qr_code(filename):
     global ngrok_url
     qr = qrcode.QRCode(
@@ -62,20 +53,6 @@ def generate_qr_code(filename):
 @app.route("/")
 def robot():
     return render_template("robot.html")
-
-
-# @app.route("/download/<int:filename>")
-# def download(filename):
-#     path = f"static/template/{filename}.png"
-#     download_name = f"result_{filename}.png"
-#     return send_file(path, as_attachment=True, download_name=download_name)
-
-
-@app.route("/download/<int:filename>")
-def download(filename):
-    path = f"static/template/{filename}.png"
-    download_name = f"result_{filename}.png"
-    return send_file(path, as_attachment=True, download_name=download_name)
 
 
 @app.route("/qr_code")
