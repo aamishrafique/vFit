@@ -133,3 +133,26 @@ window.onload = function () {
     updateDialogText();
   }, 2000);
 };
+
+// Assuming the swipe gesture logic is similar to the one in robot.js
+function checkGesture() {
+  fetch("/get_gesture")
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.swipe === "Swipe Right") {
+        ang = ang - 36; // Adjust angle for carousel
+        $("*").css("--ang", ang);
+        document.getElementById("scroll").play(); // Assuming this is for sound
+      } else if (data.swipe === "Swipe Left") {
+        ang = ang + 36; // Adjust angle for carousel
+        $("*").css("--ang", ang);
+        document.getElementById("scroll").play(); // Assuming this is for sound
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+// Call this function periodically to check for gestures
+setInterval(checkGesture, 1000);
