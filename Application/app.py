@@ -18,7 +18,8 @@ thumbs_up_threshold = 0.05
 swipe_threshold = 0.05
 
 app = Flask(__name__, static_url_path="/static")
-ngrok_url = "https://1cdf-139-135-32-235.ngrok-free.app"
+ngrok_url = "https://32e7-223-123-23-197.ngrok-free.app"
+live_url = "http://192.168.8.106:5000"
 
 cloth_idx_on_top = 1
 
@@ -33,7 +34,7 @@ def process_frame(frame):
 
     if results.multi_hand_landmarks:
         for hand_landmarks in results.multi_hand_landmarks:
-            # Thumbs-up detection
+            # Thumbs-Up Detection
             thumb_tip = hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP]
             index_tip = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
             distance_thumb_index = math.sqrt(
@@ -43,10 +44,10 @@ def process_frame(frame):
             if index_tip.y > thumb_tip.y and distance_thumb_index > thumbs_up_threshold:
                 thumbs_up_detected = True
 
-            # Swipe detection (assuming only one hand is in the frame)
+            # Swipe Detection
             distance = abs(index_tip.x - thumb_tip.x)
 
-            # Open palm detection
+            # Open Palm Detection
             finger_tips = [
                 hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP],
                 hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP],
@@ -54,7 +55,7 @@ def process_frame(frame):
                 hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_TIP],
                 hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_TIP],
             ]
-            # Calculate the average distance between each fingertip
+            # Calculate the Average Distance Between Each Fingertip
             avg_distance = 0
             count = 0
             for i in range(len(finger_tips)):
@@ -67,8 +68,8 @@ def process_frame(frame):
             if count > 0:
                 avg_distance /= count
 
-            # Define a threshold for open palm detection
-            open_palm_threshold = 0.1  # Adjust as needed based on your observations
+            # Define a Threshold for Open Palm Detection
+            open_palm_threshold = 0.1
 
             if avg_distance > open_palm_threshold:
                 open_palm_detected = True
@@ -96,8 +97,14 @@ def get_gesture():
     gesture_result = process_frame(frame)
     if gesture_result["swipe"] == "Swipe Right":
         cloth_idx_on_top += 1
+        if cloth_idx_on_top == 11:
+            cloth_idx_on_top = 1
     else:
         cloth_idx_on_top -= 1
+        if cloth_idx_on_top == 0:
+            cloth_idx_on_top = 10
+
+    print('Running Function: "get_gesture"')
 
     return jsonify(gesture_result)
 
@@ -105,16 +112,16 @@ def get_gesture():
 def upscale(image_filename):
     global ngrok_url
 
-    # The URL of the API endpoint
+    # The URL of the API Endpoint
     url = "https://api.claid.ai/v1-beta1/image/edit"
 
-    # The header should contain your authorization token and content type
+    # The Header Should Contain the Authorization Token and Content Type
     headers = {
         "Authorization": "Bearer e4f0525e211d4e4aa74a4534160d3f21",
         "Content-Type": "application/json",
     }
 
-    # The payload as a dictionary
+    # The Payload as a Dictionary
     payload = {
         "input": f"{ngrok_url}/static/result/{image_filename}",
         "operations": {
@@ -127,15 +134,15 @@ def upscale(image_filename):
         "output": {"format": {"type": "jpeg", "quality": 90, "progressive": True}},
     }
 
-    print(payload)
+    print(f"Payload:\n{payload}")
 
-    # Making the POST request
+    # Making the POST Request
     response = requests.post(url, headers=headers, data=json.dumps(payload))
 
-    # Check if the request was successful
+    # Check if the Request was Successful
     if response.status_code == 200:
         print("Image has been successfully edited.")
-        # Assuming the API returns a URL to the edited image or similar
+        # Assuming the API Returns a URL to the Edited Image or Similar
         edited_image_url = response.json().get("tmp_url")
         print("Edited image URL:", edited_image_url)
     else:
@@ -238,21 +245,22 @@ def images(filename):
 
 @app.route("/home")
 def home():
-    return render_template("home.html")
+    global cloth_idx_on_top
+    return render_template("home.html", cloth_idx_on_top=cloth_idx_on_top)
 
 
 def get_vFit(cloth_file):
-    global i
+    global live_url
     image_filename = f"{i}.jpg"
     path_to_save = os.path.join(
         os.path.dirname(__file__), "static", "result", image_filename
     )
-    live_url = "http://192.168.0.126:5000/snap"
-    response = requests.get(live_url)
+    response = requests.get(live_url + "/snap")
     with open(path_to_save, "wb") as file:
         file.write(response.content)
 
-    vFit_url = "https://a951-154-192-48-70.ngrok-free.app/"
+    print('Running Route: "get_vFit"')
+    vFit_url = "https://81a4-2407-d000-a-751b-91df-6d3b-63bc-3db6.ngrok-free.app/"
     r = requests.post(vFit_url, files={"imageUpload": open(path_to_save, "rb")})
     fit = requests.get(vFit_url + f"try_api?cloth={cloth_file}")
 
@@ -260,13 +268,38 @@ def get_vFit(cloth_file):
         file.write(fit.content)
 
 
+@app.route("/get_current_index", methods=["POST"])
+def get_current_index():
+    print('Running Route "get_current_index"')
+    global cloth_idx_on_top
+    data = request.get_json()
+    currentIndex = data.get("currentIndex", None)
+    cloth_idx_on_top = currentIndex
+    response = {"message": "success"}
+    return jsonify(response)
+
+
 @app.route("/trigger/<key>")
 def trigger(key):
+    global cloth_idx_on_top
     if key == "n":
         return redirect(url_for("home"))
-    elif key == "v":
-        cloth_file = "00404_00.jpg"
-        get_vFit(cloth_file)
+    elif key == "p":
+        dict_map = {
+            1: "00301_00.jpg",
+            2: "00419_00.jpg",
+            3: "00404_00.jpg",
+            4: "00946_00.jpg",
+            5: "00044_00.jpg",
+            6: "01177_00.jpg",
+            7: "00514_00.jpg",
+            8: "00899_00.jpg",
+            9: "00125_00.jpg",
+            10: "00634_00.jpg",
+            11: "00634_00.jpg",
+        }
+        print(f"Current Cloth Index: {cloth_idx_on_top}")
+        get_vFit(dict_map[cloth_idx_on_top])
         return redirect(url_for("qr_code"))
     else:
         return redirect(url_for("robot"))

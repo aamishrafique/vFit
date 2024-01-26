@@ -1,25 +1,53 @@
 // Slider Pagination
 var ang = 0;
 var count = 0;
-let currentIndex = 0;
+let currentIndex = 1;
+var image_link = document.getElementById("image_link");
+var live_url = "http://192.168.8.106:5000/video_feed?cloth_idx=";
+image_link.src = live_url + currentIndex;
 
 $("#prev").click(function () {
-  ang = ang + 36;
+  ang += 36;
   $("*").css("--ang", ang);
   count++;
   currentIndex--;
+  if (currentIndex === 0) {
+    currentIndex = 10;
+  }
+  sendIndexToServer(currentIndex);
+  image_link.src = live_url + currentIndex;
   document.getElementById("scroll").play();
   checkAndUpdateDialogText();
 });
 
 $("#next").click(function () {
-  ang = ang - 36;
+  ang -= 36;
   $("*").css("--ang", ang);
   count++;
-  currentIndex--;
+  currentIndex++;
+  if (currentIndex === 11) {
+    currentIndex = 1;
+  }
+  sendIndexToServer(currentIndex);
+  image_link.src = live_url + currentIndex;
   document.getElementById("scroll").play();
   checkAndUpdateDialogText();
 });
+
+function sendIndexToServer(currentIndex) {
+  $.ajax({
+    url: "/get_current_index",
+    method: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({ currentIndex: currentIndex }),
+    success: function (response) {
+      console.log(response);
+    },
+    error: function (error) {
+      console.error(error);
+    },
+  });
+}
 
 document.addEventListener("keydown", function (event) {
   if (event.key === "p") {
@@ -61,12 +89,6 @@ function animateDiv($target) {
 
 // Dialog Box
 var dialogElement = document.getElementById("dialog");
-
-// document.addEventListener("keydown", function (event) {
-//   if (event.key === "t") {
-//     updateDialogText();
-//   }
-// });
 
 // Update the Dialog Text
 function updateDialogText() {
@@ -143,16 +165,28 @@ function checkGesture() {
     .then((response) => response.json())
     .then((data) => {
       if (data.swipe === "Swipe Right") {
-        decreaseOpacity();
-        ang = ang - 36; // Adjust angle for carousel
+        ang = ang - 36;
         $("*").css("--ang", ang);
-        document.getElementById("scroll").play(); // Assuming this is for sound
+        count++;
+        currentIndex++;
+        if (currentIndex === 10) {
+          currentIndex = 0;
+        }
+        document.getElementById("scroll").play();
+        checkAndUpdateDialogText();
       } else if (data.swipe === "Swipe Left") {
-        decreaseOpacity();
-        ang = ang + 36; // Adjust angle for carousel
+        ang = ang + 36;
         $("*").css("--ang", ang);
-        document.getElementById("scroll").play(); // Assuming this is for sound
+        count++;
+        currentIndex--;
+        if (currentIndex === 0) {
+          currentIndex = 10;
+        }
+        document.getElementById("scroll").play();
+        checkAndUpdateDialogText();
       }
+      sendIndexToServer(currentIndex);
+      image_link.src = live_url + currentIndex;
     })
     .catch((error) => {
       console.error("Error:", error);

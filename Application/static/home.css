@@ -229,7 +229,7 @@ h1 {
   /* margin-bottom: 1500px; */
   padding-right: 395px;
   position: absolute;
-  z-index: 1;
+  z-index: 2;
 }
 
 .animate-move-top-left {
@@ -433,6 +433,7 @@ h1 {
   left: 36%;
   font-size: 25px;
   color: white;
+  z-index: 2;
 }
 
 /* Dialog Box */
@@ -497,11 +498,20 @@ h1 {
   }
 }
 
-.image {
-  /* width: 1080px; */
-  /* height: 1920px; */
+/* .image {
   position: absolute;
-  width: 100%;
-  height: auto;
-  z-index: -1;
+  margin-bottom: 25%;
+  margin-left: 0%;
+  width: 80%;
+  height: 70%;
+  z-index: 1;
+} */
+
+.image {
+  position: absolute;
+  border-radius: 10px;
+  margin-bottom: 25%;
+  width: 90%;
+  /* height: auto; */
+  z-index: 1;
 }
