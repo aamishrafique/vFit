@@ -1,11 +1,13 @@
 // Slider Pagination
 var ang = 0;
 var count = 0;
+let currentIndex = 0;
 
 $("#prev").click(function () {
   ang = ang + 36;
   $("*").css("--ang", ang);
   count++;
+  currentIndex--;
   document.getElementById("scroll").play();
   checkAndUpdateDialogText();
 });
@@ -14,6 +16,7 @@ $("#next").click(function () {
   ang = ang - 36;
   $("*").css("--ang", ang);
   count++;
+  currentIndex--;
   document.getElementById("scroll").play();
   checkAndUpdateDialogText();
 });
@@ -140,10 +143,12 @@ function checkGesture() {
     .then((response) => response.json())
     .then((data) => {
       if (data.swipe === "Swipe Right") {
+        decreaseOpacity();
         ang = ang - 36; // Adjust angle for carousel
         $("*").css("--ang", ang);
         document.getElementById("scroll").play(); // Assuming this is for sound
       } else if (data.swipe === "Swipe Left") {
+        decreaseOpacity();
         ang = ang + 36; // Adjust angle for carousel
         $("*").css("--ang", ang);
         document.getElementById("scroll").play(); // Assuming this is for sound

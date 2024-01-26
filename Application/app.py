@@ -18,7 +18,9 @@ thumbs_up_threshold = 0.05
 swipe_threshold = 0.05
 
 app = Flask(__name__, static_url_path="/static")
-ngrok_url = "https://7721-139-135-32-235.ngrok-free.app"
+ngrok_url = "https://1cdf-139-135-32-235.ngrok-free.app"
+
+cloth_idx_on_top = 1
 
 
 def process_frame(frame):
@@ -86,11 +88,17 @@ def process_frame(frame):
 
 @app.route("/get_gesture")
 def get_gesture():
+    global cloth_idx_on_top
     ret, frame = cap.read()
     if not ret:
         return jsonify({"gesture": "Error"})
 
     gesture_result = process_frame(frame)
+    if gesture_result["swipe"] == "Swipe Right":
+        cloth_idx_on_top += 1
+    else:
+        cloth_idx_on_top -= 1
+
     return jsonify(gesture_result)
 
 
@@ -110,11 +118,16 @@ def upscale(image_filename):
     payload = {
         "input": f"{ngrok_url}/static/result/{image_filename}",
         "operations": {
-            "resizing": {"width": 800, "height": 800, "fit": "crop"},
-            "adjustments": {"hdr": 60, "sharpness": 40},
+            "restorations": {"upscale": "smart_enhance"},
+            "resizing": {"width": 1000, "height": 1000, "fit": "crop"},
+            "adjustments": {
+                "hdr": {"intensity": 0, "stitching": True},
+            },
         },
-        "output": {"format": {"type": "jpeg", "quality": 90}},
+        "output": {"format": {"type": "jpeg", "quality": 90, "progressive": True}},
     }
+
+    print(payload)
 
     # Making the POST request
     response = requests.post(url, headers=headers, data=json.dumps(payload))
@@ -186,8 +199,8 @@ def qr_code():
     global ngrok_url
     image_filename = f"{i}.jpg"
 
-    scale_factor = 1.2
-    y_offset_shift = -50
+    scale_factor = 1.9
+    y_offset_shift = -100
     global background
     overlay = cv2.imread(
         os.path.join(os.path.dirname(__file__), "static", "result", image_filename)
@@ -206,7 +219,10 @@ def qr_code():
     upscale_url = upscale(image_filename)
 
     r = requests.get(upscale_url)
-    f = open("hello.jpeg", "wb")
+    f = open(
+        os.path.join(os.path.dirname(__file__), "static", "upscale", image_filename),
+        "wb",
+    )
     f.write(r.content)
 
     img = generate_qr_code(image_filename)
@@ -225,11 +241,32 @@ def home():
     return render_template("home.html")
 
 
+def get_vFit(cloth_file):
+    global i
+    image_filename = f"{i}.jpg"
+    path_to_save = os.path.join(
+        os.path.dirname(__file__), "static", "result", image_filename
+    )
+    live_url = "http://192.168.0.126:5000/snap"
+    response = requests.get(live_url)
+    with open(path_to_save, "wb") as file:
+        file.write(response.content)
+
+    vFit_url = "https://a951-154-192-48-70.ngrok-free.app/"
+    r = requests.post(vFit_url, files={"imageUpload": open(path_to_save, "rb")})
+    fit = requests.get(vFit_url + f"try_api?cloth={cloth_file}")
+
+    with open(path_to_save, "wb") as file:
+        file.write(fit.content)
+
+
 @app.route("/trigger/<key>")
 def trigger(key):
     if key == "n":
         return redirect(url_for("home"))
-    elif key == "p":
+    elif key == "v":
+        cloth_file = "00404_00.jpg"
+        get_vFit(cloth_file)
         return redirect(url_for("qr_code"))
     else:
         return redirect(url_for("robot"))

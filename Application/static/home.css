@@ -500,6 +500,8 @@ h1 {
 .image {
   /* width: 1080px; */
   /* height: 1920px; */
+  position: absolute;
   width: 100%;
-  /* z-index: 5; */
+  height: auto;
+  z-index: -1;
 }

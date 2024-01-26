@@ -1,15 +1,5 @@
 let isFirstLoad = true;
 
-// document.addEventListener("keydown", function (event) {
-//   if (event.key === " ") {
-//     sleepAwakeState();
-//     playEnterSound();
-//   }
-//   if (event.key === " " && !dialogShown) {
-//     showDialog();
-//   }
-// });
-
 function sleepAwakeState() {
   const innerBody = document.querySelector(".inner");
   const jump = document.querySelector(".robot-container");
@@ -137,7 +127,7 @@ function showDialog() {
     var talk1 = document.getElementById("talk1");
     talk1.play();
     dialogElement.querySelector("p").innerText =
-      "I'm here to style to today. Shall we begin?";
+      "I'm here to style you today. Shall we begin?";
   }, 6000);
 
   var three = setTimeout(function () {
@@ -151,7 +141,7 @@ function showDialog() {
 
   var hideTimeout = setTimeout(function () {
     closeDialog();
-  }, 12000); // Change this to Set the Duration of the Last Dialog
+  }, 39000); // Change this to Set the Duration of the Last Dialog
 }
 
 function closeDialog() {
