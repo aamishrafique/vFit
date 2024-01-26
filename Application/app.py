@@ -6,6 +6,7 @@ import cv2
 import numpy as np
 
 app = Flask(__name__, static_url_path="/static")
+ngrok_url = "https://7721-139-135-32-235.ngrok-free.app"
 
 
 def merge_images(
@@ -30,22 +31,30 @@ background = cv2.imread(
 
 
 # Function to Generate the QR Code
-def generate_qr_code(data):
-    global i
+# def generate_qr_code(filename):
+#     global ngrok_url
+#     data = f"{ngrok_url}/images/{filename}"
+#     static_dir = os.path.join(os.path.dirname(__file__), "static", "qr_code")
+#     os.makedirs(static_dir, exist_ok=True)
+#     img.save(os.path.join(static_dir, f"{i}.png"))
+#     return img
+
+
+def generate_qr_code(filename):
+    global ngrok_url
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
         box_size=10,
         border=4,
     )
+    data = f"{ngrok_url}/images/{filename}"
     qr.add_data(data)
     qr.make(fit=True)
 
-    img = qr.make_image(fill_color="black", back_color="#FFFFFF")
-
+    img = qr.make_image(fill_color="black", back_color="white")
     static_dir = os.path.join(os.path.dirname(__file__), "static", "qr_code")
     os.makedirs(static_dir, exist_ok=True)
-
     img.save(os.path.join(static_dir, f"{i}.png"))
     return img
 
@@ -53,6 +62,13 @@ def generate_qr_code(data):
 @app.route("/")
 def robot():
     return render_template("robot.html")
+
+
+# @app.route("/download/<int:filename>")
+# def download(filename):
+#     path = f"static/template/{filename}.png"
+#     download_name = f"result_{filename}.png"
+#     return send_file(path, as_attachment=True, download_name=download_name)
 
 
 @app.route("/download/<int:filename>")
@@ -65,8 +81,8 @@ def download(filename):
 @app.route("/qr_code")
 def qr_code():
     global i
+    global ngrok_url
     image_filename = f"{i}.jpg"
-    ngrok_url = "https://ec80-139-135-32-235.ngrok-free.app"
 
     scale_factor = 1.2
     y_offset_shift = -50
@@ -85,13 +101,17 @@ def qr_code():
         os.path.join(os.path.dirname(__file__), "static", "template", image_filename),
         background,
     )
-    data = f"{ngrok_url}/static/template/{image_filename}"
-    # data = f"{request.url_root}static/template/{image_filename}"
 
-    img = generate_qr_code(data)
+    img = generate_qr_code(image_filename)
     # NOTE: Uncomment the Below Line
     # i += 1
     return render_template("qr_code.html", i=str(i))
+
+
+@app.route("/images/<filename>")
+def images(filename):
+    print(f"\n\n\n\n", filename)
+    return render_template("images.html", filename=filename)
 
 
 @app.route("/home")

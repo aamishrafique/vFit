@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Download Results</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='images.css') }}"
+    />
+  </head>
+  <body>
+    <h1>Download Results</h1>
+
+    <div>
+      <h2>Model Output</h2>
+      <a
+        href="{{ url_for('static', filename='result/') }}{{ filename }}"
+        target="_blank"
+      >
+        <img
+          src="{{ url_for('static', filename='result/') }}{{ filename }}"
+          alt="Model Output"
+        />
+      </a>
+    </div>
+
+    <div>
+      <h2>Model Output with Template</h2>
+      <a
+        href="{{ url_for('static', filename='template/') }}{{ filename }}"
+        target="_blank"
+      >
+        <img
+          src="{{ url_for('static', filename='template/') }}{{ filename }}"
+          alt="Model Output with Template"
+        />
+      </a>
+    </div>
+  </body>
+</html>
