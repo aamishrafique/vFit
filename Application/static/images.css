@@ -1,0 +1,45 @@
+body {
+  font-family: "Arial";
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  color: #333;
+}
+
+div {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px;
+  margin: 0;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: #3498db;
+  display: block;
+  padding: 10px;
+  background-color: #fff;
+}
+
+a:hover {
+  background-color: #3498db;
+  color: #fff;
+}
