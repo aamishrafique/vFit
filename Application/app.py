@@ -234,7 +234,7 @@ def qr_code():
 
     img = generate_qr_code(image_filename)
     # NOTE: Uncomment the Below Line
-    # i += 1
+    i += 1
     return render_template("qr_code.html", i=str(i))
 
 
