@@ -1,0 +1,7 @@
+Flask
+Pillow
+qrcode
+opencv-python
+numpy
+mediapipe
+requests
