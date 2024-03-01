@@ -1,1 +1,1 @@
-# SmartMirror
+# vFit: Smart Mirror
