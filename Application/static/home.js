@@ -3,7 +3,7 @@ var ang = 0;
 var count = 0;
 let currentIndex = 1;
 var image_link = document.getElementById("image_link");
-var live_url = "http://192.168.8.106:5000/video_feed?cloth_idx=";
+var live_url = "http://192.168.100.2:5001/video_feed?cloth_idx=";
 image_link.src = live_url + currentIndex;
 
 $("#prev").click(function () {

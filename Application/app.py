@@ -18,8 +18,8 @@ thumbs_up_threshold = 0.05
 swipe_threshold = 0.05
 
 app = Flask(__name__, static_url_path="/static")
-ngrok_url = "https://32e7-223-123-23-197.ngrok-free.app"
-live_url = "http://192.168.8.106:5000"
+ngrok_url = "https://f685-182-191-88-42.ngrok-free.app"
+live_url = "http://192.168.100.2:5001"
 
 cloth_idx_on_top = 1
 
@@ -109,51 +109,6 @@ def get_gesture():
     return jsonify(gesture_result)
 
 
-def upscale(image_filename):
-    global ngrok_url
-
-    # The URL of the API Endpoint
-    url = "https://api.claid.ai/v1-beta1/image/edit"
-
-    # The Header Should Contain the Authorization Token and Content Type
-    headers = {
-        "Authorization": "Bearer e4f0525e211d4e4aa74a4534160d3f21",
-        "Content-Type": "application/json",
-    }
-
-    # The Payload as a Dictionary
-    payload = {
-        "input": f"{ngrok_url}/static/result/{image_filename}",
-        "operations": {
-            "restorations": {"upscale": "smart_enhance"},
-            "resizing": {"width": 1000, "height": 1000, "fit": "crop"},
-            "adjustments": {
-                "hdr": {"intensity": 0, "stitching": True},
-            },
-        },
-        "output": {"format": {"type": "jpeg", "quality": 90, "progressive": True}},
-    }
-
-    print(f"Payload:\n{payload}")
-
-    # Making the POST Request
-    response = requests.post(url, headers=headers, data=json.dumps(payload))
-
-    # Check if the Request was Successful
-    if response.status_code == 200:
-        print("Image has been successfully edited.")
-        # Assuming the API Returns a URL to the Edited Image or Similar
-        edited_image_url = response.json().get("tmp_url")
-        print("Edited image URL:", edited_image_url)
-    else:
-        print("Failed to edit image. Status code:", response.status_code)
-        print("Response:", response.text)
-
-    upscale_url = response.json()["data"]["output"]["tmp_url"]
-
-    return upscale_url
-
-
 def merge_images(
     background_path, overlay_path, output_path, scale_factor=1.2, y_offset_shift=-50
 ):
@@ -223,14 +178,6 @@ def qr_code():
         os.path.join(os.path.dirname(__file__), "static", "template", image_filename),
         background,
     )
-    upscale_url = upscale(image_filename)
-
-    r = requests.get(upscale_url)
-    f = open(
-        os.path.join(os.path.dirname(__file__), "static", "upscale", image_filename),
-        "wb",
-    )
-    f.write(r.content)
 
     img = generate_qr_code(image_filename)
     # NOTE: Uncomment the Below Line
