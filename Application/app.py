@@ -18,8 +18,8 @@ thumbs_up_threshold = 0.05
 swipe_threshold = 0.05
 
 app = Flask(__name__, static_url_path="/static")
-ngrok_url = "https://f685-182-191-88-42.ngrok-free.app"
-live_url = "http://192.168.100.2:5001"
+ngrok_url = "https://1e76-111-68-96-68.ngrok-free.app"
+live_url = "http://172.16.51.45:5000/"
 
 cloth_idx_on_top = 1
 
@@ -182,7 +182,7 @@ def qr_code():
     img = generate_qr_code(image_filename)
     # NOTE: Uncomment the Below Line
     i += 1
-    return render_template("qr_code.html", i=str(i))
+    return render_template("qr_code.html", i=str(i - 1))
 
 
 @app.route("/images/<filename>")
@@ -207,7 +207,8 @@ def get_vFit(cloth_file):
         file.write(response.content)
 
     print('Running Route: "get_vFit"')
-    vFit_url = "https://81a4-2407-d000-a-751b-91df-6d3b-63bc-3db6.ngrok-free.app/"
+    print(f"Image Name: {image_filename}")
+    vFit_url = "https://1ff5-2407-d000-a-402a-577f-c3e4-4989-5ea0.ngrok-free.app/"
     r = requests.post(vFit_url, files={"imageUpload": open(path_to_save, "rb")})
     fit = requests.get(vFit_url + f"try_api?cloth={cloth_file}")
 
@@ -233,17 +234,17 @@ def trigger(key):
         return redirect(url_for("home"))
     elif key == "p":
         dict_map = {
-            1: "00301_00.jpg",
-            2: "00419_00.jpg",
-            3: "00404_00.jpg",
-            4: "00946_00.jpg",
-            5: "00044_00.jpg",
-            6: "01177_00.jpg",
-            7: "00514_00.jpg",
-            8: "00899_00.jpg",
-            9: "00125_00.jpg",
-            10: "00634_00.jpg",
-            11: "00634_00.jpg",
+            1: "1.jpg",
+            2: "2.jpg",
+            3: "3.jpg",
+            4: "4.jpg",
+            5: "5.jpg",
+            6: "6.jpg",
+            7: "7.jpg",
+            8: "8.jpg",
+            9: "9.jpg",
+            10: "10.jpg",
+            11: "11.jpg",
         }
         print(f"Current Cloth Index: {cloth_idx_on_top}")
         get_vFit(dict_map[cloth_idx_on_top])

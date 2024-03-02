@@ -165,14 +165,6 @@ h1 {
   }
 }
 .fade {
-  /* background: #0006;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.4) 30%,
-    rgba(0, 0, 0, 0.4) 70%,
-    rgba(0, 0, 0, 0) 100%
-  ); */
   background: rgba(255, 255, 255, 0);
   width: 860px;
   height: 200px;
@@ -226,7 +218,6 @@ h1 {
   width: 400px;
   height: 300px;
   padding-bottom: 647px;
-  /* margin-bottom: 1500px; */
   padding-right: 395px;
   position: absolute;
   z-index: 2;
@@ -497,15 +488,6 @@ h1 {
     background-position: 100% 0;
   }
 }
-
-/* .image {
-  position: absolute;
-  margin-bottom: 25%;
-  margin-left: 0%;
-  width: 80%;
-  height: 70%;
-  z-index: 1;
-} */
 
 .image {
   position: absolute;
