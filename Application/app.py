@@ -11,11 +11,11 @@ import json
 
 
 # Initialize the Webcam and MediaPipe Hands
-cap = cv2.VideoCapture(0)
-mp_hands = mp.solutions.hands
-hands = mp_hands.Hands()
-thumbs_up_threshold = 0.05
-swipe_threshold = 0.05
+# cap = cv2.VideoCapture(0)
+# mp_hands = mp.solutions.hands
+# hands = mp_hands.Hands()
+# thumbs_up_threshold = 0.05
+# swipe_threshold = 0.05
 
 app = Flask(__name__, static_url_path="/static")
 ngrok_url = "https://1e76-111-68-96-68.ngrok-free.app"
@@ -24,89 +24,89 @@ live_url = "http://172.16.51.45:5000/"
 cloth_idx_on_top = 1
 
 
-def process_frame(frame):
-    rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    results = hands.process(rgb_frame)
+# def process_frame(frame):
+#     rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+#     results = hands.process(rgb_frame)
 
-    thumbs_up_detected = False
-    swipe_direction = "No Swipe"
-    open_palm_detected = False
+#     thumbs_up_detected = False
+#     swipe_direction = "No Swipe"
+#     open_palm_detected = False
 
-    if results.multi_hand_landmarks:
-        for hand_landmarks in results.multi_hand_landmarks:
-            # Thumbs-Up Detection
-            thumb_tip = hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP]
-            index_tip = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
-            distance_thumb_index = math.sqrt(
-                (thumb_tip.x - index_tip.x) ** 2 + (thumb_tip.y - index_tip.y) ** 2
-            )
+#     if results.multi_hand_landmarks:
+#         for hand_landmarks in results.multi_hand_landmarks:
+#             # Thumbs-Up Detection
+#             thumb_tip = hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP]
+#             index_tip = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
+#             distance_thumb_index = math.sqrt(
+#                 (thumb_tip.x - index_tip.x) ** 2 + (thumb_tip.y - index_tip.y) ** 2
+#             )
 
-            if index_tip.y > thumb_tip.y and distance_thumb_index > thumbs_up_threshold:
-                thumbs_up_detected = True
+#             if index_tip.y > thumb_tip.y and distance_thumb_index > thumbs_up_threshold:
+#                 thumbs_up_detected = True
 
-            # Swipe Detection
-            distance = abs(index_tip.x - thumb_tip.x)
+#             # Swipe Detection
+#             distance = abs(index_tip.x - thumb_tip.x)
 
-            # Open Palm Detection
-            finger_tips = [
-                hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP],
-                hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP],
-                hand_landmarks.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP],
-                hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_TIP],
-                hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_TIP],
-            ]
-            # Calculate the Average Distance Between Each Fingertip
-            avg_distance = 0
-            count = 0
-            for i in range(len(finger_tips)):
-                for j in range(i + 1, len(finger_tips)):
-                    avg_distance += math.sqrt(
-                        (finger_tips[i].x - finger_tips[j].x) ** 2
-                        + (finger_tips[i].y - finger_tips[j].y) ** 2
-                    )
-                    count += 1
-            if count > 0:
-                avg_distance /= count
+#             # Open Palm Detection
+#             finger_tips = [
+#                 hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP],
+#                 hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP],
+#                 hand_landmarks.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP],
+#                 hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_TIP],
+#                 hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_TIP],
+#             ]
+#             # Calculate the Average Distance Between Each Fingertip
+#             avg_distance = 0
+#             count = 0
+#             for i in range(len(finger_tips)):
+#                 for j in range(i + 1, len(finger_tips)):
+#                     avg_distance += math.sqrt(
+#                         (finger_tips[i].x - finger_tips[j].x) ** 2
+#                         + (finger_tips[i].y - finger_tips[j].y) ** 2
+#                     )
+#                     count += 1
+#             if count > 0:
+#                 avg_distance /= count
 
-            # Define a Threshold for Open Palm Detection
-            open_palm_threshold = 0.1
+#             # Define a Threshold for Open Palm Detection
+#             open_palm_threshold = 0.1
 
-            if avg_distance > open_palm_threshold:
-                open_palm_detected = True
+#             if avg_distance > open_palm_threshold:
+#                 open_palm_detected = True
 
-            if distance > swipe_threshold:
-                if index_tip.x < thumb_tip.x:
-                    swipe_direction = "Swipe Right"
-                elif index_tip.x > thumb_tip.x:
-                    swipe_direction = "Swipe Left"
+#             if distance > swipe_threshold:
+#                 if index_tip.x < thumb_tip.x:
+#                     swipe_direction = "Swipe Right"
+#                 elif index_tip.x > thumb_tip.x:
+#                     swipe_direction = "Swipe Left"
 
-    return {
-        "thumbs_up": "Thumbs up" if thumbs_up_detected else "None",
-        "swipe": swipe_direction,
-        "open_palm": "Open Palm" if open_palm_detected else "None",
-    }
+#     return {
+#         "thumbs_up": "Thumbs up" if thumbs_up_detected else "None",
+#         "swipe": swipe_direction,
+#         "open_palm": "Open Palm" if open_palm_detected else "None",
+#     }
 
 
-@app.route("/get_gesture")
-def get_gesture():
-    global cloth_idx_on_top
-    ret, frame = cap.read()
-    if not ret:
-        return jsonify({"gesture": "Error"})
+# @app.route("/get_gesture")
+# def get_gesture():
+#     global cloth_idx_on_top
+#     ret, frame = cap.read()
+#     if not ret:
+#         return jsonify({"gesture": "Error"})
 
-    gesture_result = process_frame(frame)
-    if gesture_result["swipe"] == "Swipe Right":
-        cloth_idx_on_top += 1
-        if cloth_idx_on_top == 11:
-            cloth_idx_on_top = 1
-    else:
-        cloth_idx_on_top -= 1
-        if cloth_idx_on_top == 0:
-            cloth_idx_on_top = 10
+#     gesture_result = process_frame(frame)
+#     if gesture_result["swipe"] == "Swipe Right":
+#         cloth_idx_on_top += 1
+#         if cloth_idx_on_top == 11:
+#             cloth_idx_on_top = 1
+#     else:
+#         cloth_idx_on_top -= 1
+#         if cloth_idx_on_top == 0:
+#             cloth_idx_on_top = 10
 
-    print('Running Function: "get_gesture"')
+#     print('Running Function: "get_gesture"')
 
-    return jsonify(gesture_result)
+#     return jsonify(gesture_result)
 
 
 def merge_images(
