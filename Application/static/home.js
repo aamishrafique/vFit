@@ -3,7 +3,7 @@ var ang = 0;
 var count = 0;
 let currentIndex = 1;
 var image_link = document.getElementById("image_link");
-var live_url = "http://172.16.51.45:5000/video_feed?cloth_idx=";
+var live_url = "http://192.168.55.32:5000/video_feed?cloth_idx=";
 image_link.src = live_url + currentIndex;
 
 $("#prev").click(function () {
@@ -160,38 +160,38 @@ window.onload = function () {
 };
 
 // Assuming the swipe gesture logic is similar to the one in robot.js
-function checkGesture() {
-  fetch("/get_gesture")
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.swipe === "Swipe Right") {
-        ang = ang - 36;
-        $("*").css("--ang", ang);
-        count++;
-        currentIndex++;
-        if (currentIndex === 10) {
-          currentIndex = 0;
-        }
-        document.getElementById("scroll").play();
-        checkAndUpdateDialogText();
-      } else if (data.swipe === "Swipe Left") {
-        ang = ang + 36;
-        $("*").css("--ang", ang);
-        count++;
-        currentIndex--;
-        if (currentIndex === 0) {
-          currentIndex = 10;
-        }
-        document.getElementById("scroll").play();
-        checkAndUpdateDialogText();
-      }
-      sendIndexToServer(currentIndex);
-      image_link.src = live_url + currentIndex;
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-}
+// function checkGesture() {
+//   fetch("/get_gesture")
+//     .then((response) => response.json())
+//     .then((data) => {
+//       if (data.swipe === "Swipe Right") {
+//         ang = ang - 36;
+//         $("*").css("--ang", ang);
+//         count++;
+//         currentIndex++;
+//         if (currentIndex === 10) {
+//           currentIndex = 0;
+//         }
+//         document.getElementById("scroll").play();
+//         checkAndUpdateDialogText();
+//       } else if (data.swipe === "Swipe Left") {
+//         ang = ang + 36;
+//         $("*").css("--ang", ang);
+//         count++;
+//         currentIndex--;
+//         if (currentIndex === 0) {
+//           currentIndex = 10;
+//         }
+//         document.getElementById("scroll").play();
+//         checkAndUpdateDialogText();
+//       }
+//       sendIndexToServer(currentIndex);
+//       image_link.src = live_url + currentIndex;
+//     })
+//     .catch((error) => {
+//       console.error("Error:", error);
+//     });
+// }
 
 // Call this function periodically to check for gestures
-setInterval(checkGesture, 1000);
+// setInterval(checkGesture, 1000);

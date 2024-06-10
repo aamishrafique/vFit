@@ -18,8 +18,8 @@ import json
 # swipe_threshold = 0.05
 
 app = Flask(__name__, static_url_path="/static")
-ngrok_url = "https://1e76-111-68-96-68.ngrok-free.app"
-live_url = "http://172.16.51.45:5000/"
+ngrok_url = "https://9a30-58-65-153-188.ngrok-free.app/"
+live_url = "http://192.168.55.32:5000/"
 
 cloth_idx_on_top = 1
 
@@ -128,6 +128,11 @@ i = 1
 background = cv2.imread(
     os.path.join(os.path.dirname(__file__), "static", "images", "template.png")
 )
+os.makedirs(os.path.join(os.path.dirname(__file__), "static", "result"), exist_ok=True)
+os.makedirs(
+    os.path.join(os.path.dirname(__file__), "static", "template"), exist_ok=True
+)
+os.makedirs(os.path.join(os.path.dirname(__file__), "static", "qr_code"), exist_ok=True)
 
 
 # Function to Generate the QR Code
@@ -145,7 +150,6 @@ def generate_qr_code(filename):
 
     img = qr.make_image(fill_color="black", back_color="white")
     static_dir = os.path.join(os.path.dirname(__file__), "static", "qr_code")
-    os.makedirs(static_dir, exist_ok=True)
     img.save(os.path.join(static_dir, f"{i}.png"))
     return img
 
@@ -208,7 +212,7 @@ def get_vFit(cloth_file):
 
     print('Running Route: "get_vFit"')
     print(f"Image Name: {image_filename}")
-    vFit_url = "https://1ff5-2407-d000-a-402a-577f-c3e4-4989-5ea0.ngrok-free.app/"
+    vFit_url = "https://f88b-2407-d000-a-223c-5555-7179-37b2-1b48.ngrok-free.app/"
     r = requests.post(vFit_url, files={"imageUpload": open(path_to_save, "rb")})
     fit = requests.get(vFit_url + f"try_api?cloth={cloth_file}")
 
@@ -234,17 +238,17 @@ def trigger(key):
         return redirect(url_for("home"))
     elif key == "p":
         dict_map = {
-            1: "1.jpg",
-            2: "2.jpg",
-            3: "3.jpg",
-            4: "4.jpg",
-            5: "5.jpg",
-            6: "6.jpg",
-            7: "7.jpg",
-            8: "8.jpg",
-            9: "9.jpg",
-            10: "10.jpg",
-            11: "11.jpg",
+            1: "00000_00.jpg",
+            2: "00001_00.jpg",
+            3: "00003_00.jpg",
+            4: "00005_00.jpg",
+            5: "00007_00.jpg",
+            6: "00009_00.jpg",
+            7: "00010_00.jpg",
+            8: "00015_00.jpg",
+            9: "00019_00.jpg",
+            10: "00029_00.jpg",
+            11: "00030_00.jpg",
         }
         print(f"Current Cloth Index: {cloth_idx_on_top}")
         get_vFit(dict_map[cloth_idx_on_top])
